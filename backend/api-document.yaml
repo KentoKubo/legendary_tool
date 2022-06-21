@@ -1,0 +1,178 @@
+openapi: 3.0.2
+info:
+  title: ミリしらプラットフォーム
+  description: |-
+    <b>ミリしらプラットフォーム API仕様</b><br>
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8000/
+paths:
+  /test:
+    get:
+      summary: TestAPI
+      description: |
+        TestAPI.<br>
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/TestGetResponse'
+  /targets:
+    get:
+      summary: ミリしら対象者の情報を取得API(未実装)
+      description: |
+        写真に関する情報のリストを取得する.<br>
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TargetsGetResponse'
+  
+  /question:
+    get:
+      summary: 質問リストを取得するAPI(未実装)
+      description: |
+        質問リストを取得する.<br>
+        対象者のIDをリクエストで受け取り、質問リストを返す<br>
+      parameters:
+        - name: id
+          in: header
+          description: 対象者のID
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionGetResponse'
+  /_answer:
+    post:
+      summary: 回答を送信するAPI(未実装)
+      description: |
+        質問リストの全項目に対する回答を受け取る.<br>
+        対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_AnswerPostRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+  /answer:
+    get:
+      summary: 登録済み回答を取得するAPI(未実装)
+      description: |
+        質問リストの全項目に対する回答を受け取る.<br>
+        対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
+      parameters:
+        - name: question_id
+          in: query
+          description: 質問ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswerGetResponse'
+
+components:
+  schemas:
+    TestGetResponse:
+      type: object
+      properties:
+        data:
+          type: string
+    TargetsGetResponse:
+      type: object
+      properties:
+        pictureInfoList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PictureInfo'
+        
+    _AnswerPostRequest:
+      type: object
+      properties:
+        QAList:
+          type: array
+          items:
+            $ref: '#/components/schemas/QAInfo'
+            
+            
+    QuestionGetResponse:
+      type: object
+      properties:
+        questionList:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionInfo'
+          description: まだ未定
+
+
+    AnswerGetResponse:
+      type: object
+      properties:
+        answerList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnswerInfo'
+          description: まだ未定
+    
+          
+          
+    PictureInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 対象者のID
+        picture:
+          type: string
+          description: 後で型を変更
+        name:
+          type: string
+          description: 画像の名前?
+
+    QuestionInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 質問ID
+        question:
+          type: string
+          description: 質問項目
+
+    QAInfo:
+      type: object
+      properties:
+          question_id:
+            type: integer
+            description: 質問ID
+          answer:
+            type: string
+            description: 質問IDに対する回答
+    
+    AnswerInfo:
+      type: object
+      properties:
+        answer:
+          type: string
+          description: 回答
+            
+            
+            

@@ -10,7 +10,7 @@
 
 2. `Compiled successfully!`の表示後，次のリンクを開く
 
-   [http://localhost:3000](http://localhost:3000)
+   [http://localhost:3030](http://localhost:3030)
 
 # Front 開発用
 

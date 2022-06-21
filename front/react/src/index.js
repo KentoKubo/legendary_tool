@@ -4,13 +4,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 
-import App from './App'
+import Top from './pages/Top/Top'
+import SelectPerson from './pages/SelectPerson/SelectPerson'
+import QuestionList from './pages/QuestionList/QuestionList'
+import AnswerList from './pages/AnswerList/AnswerList'
 
 const root = document.getElementById('root')
 ReactDOM.render(
   <Router>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Top />} />
+      <Route path="/select-person" element={<SelectPerson />} />
+      <Route path="/question-list" element={<QuestionList />} />
+      <Route path="/answer-list" element={<AnswerList />} />
     </Routes>
   </Router>,
   root

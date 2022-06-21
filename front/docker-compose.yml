@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./react:/usr/src/app
+      - node_modules_volume:/usr/src/app/node_modules
+    working_dir: /usr/src/app
+    command: sh -c "yarn install && yarn start"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "3000:3000"
+    tty: true
+    stdin_open: true
+
+volumes:
+  node_modules_volume:

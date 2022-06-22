@@ -7,7 +7,7 @@ from .models import Target, Question, Answer
 class TargetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Target
-        fields = ["id", "name"]
+        fields = ["id", "name", "picture"]
 
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ["id", "question", "picture"]
+        fields = ["id", "question"]
 
 
 class AnswerSerializer(serializers.ModelSerializer):

@@ -21,7 +21,7 @@ paths:
                   $ref: '#/components/schemas/TestGetResponse'
   /targets:
     get:
-      summary: ミリしら対象者の情報を取得API(未実装)
+      summary: ミリしら対象者の情報を取得API(pictureは未実装)
       description: |
         写真に関する情報のリストを取得する.<br>
       responses:
@@ -32,15 +32,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/TargetsGetResponse'
   
-  /question:
+  /questions:
     get:
-      summary: 質問リストを取得するAPI(未実装)
+      summary: 質問リストを取得するAPI
       description: |
         質問リストを取得する.<br>
         対象者のIDをリクエストで受け取り、質問リストを返す<br>
       parameters:
         - name: id
-          in: header
+          in: query
           description: 対象者のID
           required: true
           schema:
@@ -52,25 +52,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/QuestionGetResponse'
-  /_answer:
-    post:
-      summary: 回答を送信するAPI(未実装)
-      description: |
-        質問リストの全項目に対する回答を受け取る.<br>
-        対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
-      requestBody:
-        description: Request Body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/_AnswerPostRequest'
-        required: true
-      responses:
-        200:
-          description: A successful response.
-  /answer:
+
+  /answers:
     get:
-      summary: 登録済み回答を取得するAPI(未実装)
+      summary: 登録済み回答を取得するAPI
       description: |
         質問リストの全項目に対する回答を受け取る.<br>
         対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
@@ -88,6 +73,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerGetResponse'
+    post:
+      summary: 回答を送信するAPI
+      description: |
+        質問リストの全項目に対する回答を受け取る.<br>
+        対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/_AnswerPostRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
 
 components:
   schemas:

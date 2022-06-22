@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'rest_framework',
+    'mirisira_api.apps.MirisiraApiConfig'
 ]
 
 MIDDLEWARE = [

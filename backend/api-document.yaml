@@ -7,7 +7,7 @@ info:
 servers:
   - url: http://127.0.0.1:8000/
 paths:
-  /test:
+  /test/:
     get:
       summary: TestAPI
       description: |
@@ -19,7 +19,7 @@ paths:
             application/json:
                 schema:
                   $ref: '#/components/schemas/TestGetResponse'
-  /targets:
+  /targets/:
     get:
       summary: ミリしら対象者の情報を取得API(pictureは未実装)
       description: |
@@ -32,7 +32,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/TargetsGetResponse'
   
-  /questions:
+  /questions/:
     get:
       summary: 質問リストを取得するAPI
       description: |
@@ -53,7 +53,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/QuestionGetResponse'
 
-  /answers:
+  /answers/:
     get:
       summary: 登録済み回答を取得するAPI
       description: |

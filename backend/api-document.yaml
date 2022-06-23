@@ -153,6 +153,9 @@ components:
         id:
           type: integer
           description: 質問ID
+        target_id:
+          type: integer
+          description: 対象者のID
         question:
           type: string
           description: 質問項目
@@ -170,6 +173,12 @@ components:
     AnswerInfo:
       type: object
       properties:
+        id:
+          type: integer
+          description: 回答ID
+        question_id:
+          type: integer
+          description: 質問ID
         answer:
           type: string
           description: 回答

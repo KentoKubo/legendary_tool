@@ -11,12 +11,12 @@ class TargetSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField(source="target_id")
+    target_id = serializers.IntegerField()
     question = serializers.CharField(source="question_text")
 
     class Meta:
         model = Question
-        fields = ["id", "question"]
+        fields = ["id", "target_id", "question"]
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -25,4 +25,4 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Answer
-        fields = ["question_id", "answer"]
+        fields = ["id", "question_id", "answer"]

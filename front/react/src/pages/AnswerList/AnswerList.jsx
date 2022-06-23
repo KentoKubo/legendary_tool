@@ -19,8 +19,8 @@ const AnswerList = () => {
     navigate('/select-person')
   }
 
-  const clickLookAnswerButton = () => {
-    navigate('/answer-detail')
+  const clickLookAnswerButton = (item) => {
+    navigate('/answer-detail', {state: {question: item} })
   }
 
   return (
@@ -30,7 +30,7 @@ const AnswerList = () => {
       <div className={style.personImage}>image</div>
       <ul>
         {questions.map(item => (
-            <li key={item}>Q{item.question_id+1} {item.question} <Button onClick={clickLookAnswerButton} variant="outlined">見る</Button></li>
+            <li key={item.question_id}>Q{item.question_id+1} {item.question} <Button onClick={() => clickLookAnswerButton(item)} variant="outlined">見る</Button></li>
         ))}
       </ul>
     </div>

@@ -8,6 +8,7 @@ import Top from './pages/Top/Top'
 import SelectPerson from './pages/SelectPerson/SelectPerson'
 import QuestionList from './pages/QuestionList/QuestionList'
 import AnswerList from './pages/AnswerList/AnswerList'
+import AnswerDetail from './pages/AnswerDetail/AnswerDetail'
 
 const root = document.getElementById('root')
 ReactDOM.render(
@@ -17,6 +18,7 @@ ReactDOM.render(
       <Route path="/select-person" element={<SelectPerson />} />
       <Route path="/question-list" element={<QuestionList />} />
       <Route path="/answer-list" element={<AnswerList />} />
+      <Route path="/answer-detail" element={<AnswerDetail />} />
     </Routes>
   </Router>,
   root

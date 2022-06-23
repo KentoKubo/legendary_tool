@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Button } from '@mui/material'
@@ -13,36 +13,24 @@ const AnswerList = () => {
     { question_id: 4, question: "どんな人？" }
   ]
 
-  const [setCurrentQuestion] = useState(questions[0])
-  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0)
-  const [setCurrentAnswer] = useState('')
-  const [answerList, setAnswerList] = useState([])
-
   const navigate = useNavigate()
 
-  const popFromAnswerList = () => {
-    const newAnswerList = [...answerList]
-    newAnswerList.pop()
-    setAnswerList(newAnswerList)
-    setCurrentAnswer('')
+  const clickBackButton = () => {
+    navigate('/select-person')
   }
 
-  const clickPrevButton = () => {
-    if (currentQuestionNumber === 1) navigate('/select-person')
-    else {
-      setCurrentQuestion(questions[currentQuestionNumber - 1])
-      setCurrentQuestionNumber(currentQuestionNumber - 1)
-      popFromAnswerList()
-    }
+  const clickLookAnswerButton = () => {
+    navigate('/answer-detail')
   }
 
   return (
     <div className={style.container}>
+      <Button onClick={clickBackButton} variant="outlined">最初に戻る</Button>
       <h1>解答一覧を見る画面</h1>
       <div className={style.personImage}>image</div>
       <ul>
         {questions.map(item => (
-            <li key={item}>Q{item.question_id+1} {item.question} <Button onClick={clickPrevButton} variant="outlined">見る</Button></li>
+            <li key={item}>Q{item.question_id+1} {item.question} <Button onClick={clickLookAnswerButton} variant="outlined">見る</Button></li>
         ))}
       </ul>
     </div>

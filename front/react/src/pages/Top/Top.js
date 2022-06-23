@@ -11,6 +11,7 @@ const Top = () => (
       <Link to="/select-person"> Select Person </Link>
       <Link to="/question-list"> Question List </Link>
       <Link to="/answer-list"> Answer List </Link>
+      <Link to="/answer-detail"> Answer Detail </Link>
     </header>
   </div>
 )

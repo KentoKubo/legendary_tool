@@ -19,29 +19,54 @@ paths:
             application/json:
                 schema:
                   $ref: '#/components/schemas/TestGetResponse'
-  /targets/:
+  
+  /questions/:
     get:
-      summary: ミリしら対象者の情報を取得API(pictureは未実装)
+      summary: 問題一覧を取得するAPI
       description: |
-        写真に関する情報のリストを取得する.<br>
+        問題一覧を取得する.<br>
+        ユーザが指定した問題名をもとに検索を行い、問題一覧を返す<br>
+      parameters:
+        - name: title
+          in: query
+          description: 問題のタイトル
+          required: true
+          example: 鬼滅の刃
+          schema:
+            type: string
       responses:
         200:
           description: A successful response.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TargetsGetResponse'
-  
-  /questions/:
-    get:
-      summary: 質問リストを取得するAPI
+                $ref: '#/components/schemas/QuestionsGetResponse'
+    
+    post:
+      summary: 新しい問題を登録するAPI
       description: |
-        質問リストを取得する.<br>
-        対象者のIDをリクエストで受け取り、質問リストを返す<br>
+        ユーザが作成した問題の登録を行う<br>
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuestionsPostRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.                
+  
+  
+  /answers/:
+    get:
+      summary: 回答一覧を取得するAPI
+      description: |
+        問題に対する回答一覧を取得する.<br>
       parameters:
-        - name: id
+        - name: question_id
           in: query
-          description: 対象者のID
+          description: 問題ID
           required: true
           schema:
             type: integer
@@ -51,18 +76,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuestionGetResponse'
-
-  /answers/:
-    get:
-      summary: 登録済み回答を取得するAPI
+                $ref: '#/components/schemas/AnswersGetResponse'
+    post:
+      summary: 回答を登録するAPI
       description: |
-        質問リストの全項目に対する回答を受け取る.<br>
-        対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
+        回答の登録を行う.<br>
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnswersPostRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+
+  /answers/{answer_id}/:
+    get:
+      summary: 特定の回答を取得するAPI
+      description: |
+        特定の回答を取得する.<br>
       parameters:
-        - name: question_id
-          in: query
-          description: 質問ID
+        - name: answer_id
+          in: path
+          description: 回答ID
           required: true
           schema:
             type: integer
@@ -73,22 +111,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AnswerGetResponse'
-    post:
-      summary: 回答を送信するAPI
-      description: |
-        質問リストの全項目に対する回答を受け取る.<br>
-        対象者のIDと回答をリクエストで受け取り、DBに保存する<br>
-      requestBody:
-        description: Request Body
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/_AnswerPostRequest'
-        required: true
-      responses:
-        200:
-          description: A successful response.
-
+                
 components:
   schemas:
     TestGetResponse:
@@ -96,92 +119,130 @@ components:
       properties:
         data:
           type: string
-    TargetsGetResponse:
-      type: object
-      properties:
-        pictureInfoList:
-          type: array
-          items:
-            $ref: '#/components/schemas/PictureInfo'
-        
-    _AnswerPostRequest:
-      type: object
-      properties:
-        QAList:
-          type: array
-          items:
-            $ref: '#/components/schemas/QAInfo'
             
-            
-    QuestionGetResponse:
+    QuestionsGetResponse:
       type: object
       properties:
-        questionList:
+        questions:
           type: array
           items:
-            $ref: '#/components/schemas/QuestionInfo'
-          description: まだ未定
+            $ref: '#/components/schemas/GetQuestionInfo'
+          description: 問題集一覧
+    
+    QuestionsPostRequest:
+      type: object
+      properties:
+        title:
+          type: string
+          description: 問題のタイトル
+          example: 鬼滅の刃 ミリしら
+        pictures:
+          type: array
+          items:
+            type: string
+            example: YWJjZGVmZw==
+            description: 画像(base64)
+          description: 画像一覧
+        creator_name:
+          type: string
+          example: hk
+          description: 問題作成者名
 
+
+    AnswersGetResponse:
+      type: object
+      properties:
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetAnswerInfo'
+          description: 回答一覧
+    
+    AnswersPostRequest:
+      type: object
+      properties:
+        characters:
+          type: array
+          items:
+            $ref: '#/components/schemas/PostAnswerInfo'
+          description: 回答
+        answer_name:
+          type: string
+          example: hira
+          description: 回答者名
 
     AnswerGetResponse:
       type: object
       properties:
-        answerList:
+        characters:
+          items:
+            $ref: '#/components/schemas/PostAnswerInfo'
+          description: 特定の回答情報
+          
+
+
+    GetQuestionInfo:
+      type: object
+      properties:
+        question_id:
+          type: integer
+          description: 問題ID
+        title:
+          type: string
+          example: 鬼滅の刃 ミリしら
+          description: 問題のタイトル
+        pictures:
           type: array
           items:
-            $ref: '#/components/schemas/AnswerInfo'
-          description: まだ未定
-    
-          
-          
+            $ref: '#/components/schemas/PictureInfo'
+          description: 画像一覧
+        creator_name:
+          type: string
+          example: hk
+          description: 問題作成者名
+
+
     PictureInfo:
       type: object
       properties:
-        id:
-          type: integer
-          description: 対象者のID
-        picture:
-          type: string
-          description: 後で型を変更
-        name:
-          type: string
-          description: 画像の名前?
-
-    QuestionInfo:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: 質問ID
-        target_id:
-          type: integer
-          description: 対象者のID
-        question:
-          type: string
-          description: 質問項目
-
-    QAInfo:
-      type: object
-      properties:
-          question_id:
+          picture_id:
             type: integer
-            description: 質問ID
-          answer:
+            description: 写真ID
+          picture:
             type: string
-            description: 質問IDに対する回答
-    
-    AnswerInfo:
+            example: YWJjZGVmZw==
+            description: 写真(base64)
+      description: 写真IDと写真
+
+    GetAnswerInfo:
       type: object
       properties:
-        id:
+        answer_id:
           type: integer
           description: 回答ID
-        question_id:
-          type: integer
-          description: 質問ID
-        answer:
+        answer_name:
           type: string
-          description: 回答
+          example: hira
+          description: 回答者名
+        create_at:
+          type: string
+          format: date
+          description: 回答日時
+          
+    PostAnswerInfo:
+      type: object
+      properties:
+        picture_id:
+          type: integer
+          description: 回答ID
+        character_name:
+          type: string
+          example: 炭治郎
+          description: 画像に対する名前
+        character_explanation:
+          type: string
+          example: 優しい人で強い
+          description: 画像に対する説明
             
             
             

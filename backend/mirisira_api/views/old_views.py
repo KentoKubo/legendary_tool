@@ -1,24 +1,23 @@
-from rest_framework.views import APIView
-from django.http import JsonResponse
-from rest_framework import generics, status
-from rest_framework.response import Response
-
-
-
-
-
-
 # feat/2/define-model
+
+# from rest_framework.views import APIView
+# from django.http import JsonResponse
+# from rest_framework import generics, status
+# from rest_framework.response import Response
+
 # from .models import Target, Question, Answer
 # from .serializers import TargetSerializer, QuestionSerializer, AnswerSerializer
+
 
 # class APITestView(APIView):
     # def get(self, request, **kwargs):
         # return JsonResponse({"data": "get request"})
 
+
 # class TargetList(generics.ListAPIView):
     # queryset = Target.objects.all()
     # serializer_class = TargetSerializer
+
 
 # class QuestionList(generics.ListAPIView):
     # serializer_class = QuestionSerializer
@@ -26,6 +25,7 @@ from rest_framework.response import Response
     # def get_queryset(self):
         # target_id = self.request.query_params["id"]
         # return Question.objects.filter(target_id=target_id)
+
 
 # class AnswerList(generics.ListCreateAPIView):
     # serializer_class = AnswerSerializer

@@ -11,7 +11,7 @@ class Question(models.Model):
 
 class Picture(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    file_path = models.CharField(max_length=255) # TODO:survey
+    file_path = models.CharField(max_length=255) # TODO: survey how to save pictures
 
 
 class Answer(models.Model):

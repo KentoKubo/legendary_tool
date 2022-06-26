@@ -25,12 +25,13 @@ paths:
       summary: 問題一覧を取得するAPI
       description: |
         問題一覧を取得する.<br>
-        ユーザが指定した問題名をもとに検索を行い、問題一覧を返す<br>
+        ユーザが指定した問題タイトルをもとに検索を行い、問題一覧を取得する<br>
+        title(問題タイトル)を指定しない場合は全問題を取得する
       parameters:
         - name: title
           in: query
           description: 問題のタイトル
-          required: true
+          required: false
           example: 鬼滅の刃
           schema:
             type: string

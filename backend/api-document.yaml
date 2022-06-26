@@ -167,7 +167,7 @@ components:
           items:
             $ref: '#/components/schemas/PostAnswerInfo'
           description: 回答
-        answer_name:
+        answerer_name:
           type: string
           example: hira
           description: 回答者名
@@ -201,6 +201,11 @@ components:
           type: string
           example: hk
           description: 問題作成者名
+        create_at:
+          type: string
+          example: '2022-01-31T23:59'
+          format: date-time
+          description: 回答日時
 
 
     PictureInfo:
@@ -221,13 +226,14 @@ components:
         answer_id:
           type: integer
           description: 回答ID
-        answer_name:
+        answerer_name:
           type: string
           example: hira
           description: 回答者名
         create_at:
           type: string
-          format: date
+          example: '2022-01-31T23:59'
+          format: date-time
           description: 回答日時
           
     PostAnswerInfo:
@@ -244,6 +250,3 @@ components:
           type: string
           example: 優しい人で強い
           description: 画像に対する説明
-            
-            
-            

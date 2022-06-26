@@ -21,7 +21,8 @@ class Answer(models.Model):
 
 class OneCharacterAnswer(models.Model):
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    answer = models.ForeignKey(
+        Answer, related_name="characters", on_delete=models.CASCADE)
     character_name = models.CharField(max_length=31)
     character_explanation = models.TextField()
 

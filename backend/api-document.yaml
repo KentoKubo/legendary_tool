@@ -162,6 +162,9 @@ components:
     AnswersPostRequest:
       type: object
       properties:
+        question_id:
+          type: integer
+          description: 質問ID
         characters:
           type: array
           items:

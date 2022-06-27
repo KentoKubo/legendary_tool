@@ -5,7 +5,6 @@ import { Button } from '@mui/material'
 import style from './AnswerSelect.module.scss'
 
 const AnswerSelect = () => {
-  // 回答id，回答者名，回答日時，リアクション数]
   const answers = [
     { answer_id: 0, answer_name: "name1", date: "2022-06-25", reaction: 3},
     { answer_id: 1, answer_name: "name1", date: "2022-06-26", reaction: 4},
@@ -28,7 +27,7 @@ const AnswerSelect = () => {
 
   return (
     <div className={style.container}>
-      <Button onClick={clickBackButton} variant="outlined">戻る</Button>
+      <button type="button" className={style.backButton} onClick={clickBackButton} variant="outlined" >みりしら</button>
       <h1>回答選択画面</h1>
       <h1>{title}</h1>
       <ul>

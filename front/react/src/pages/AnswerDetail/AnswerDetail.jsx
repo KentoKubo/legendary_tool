@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 import  { Button } from '@mui/material'
 import style from './AnswerDetail.module.scss'
+import FlatButton from '../../components/FlatButton'
 
 const AnswerDetail = () =>{
     const answers = [
@@ -10,13 +11,6 @@ const AnswerDetail = () =>{
         { id: 1, question_id:0, answer: 'ans2'},
         { id: 2, question_id:1, answer: 'ans3'}
     ]
-    // const questions = [
-    //     { question_id: 0, question: "どんな人？" },
-    //     { question_id: 1, question: "あだ名は？" },
-    //     { question_id: 2, question: "あだ名は？" },
-    //     { question_id: 3, question: "どんな人？" },
-    //     { question_id: 4, question: "どんな人？" }
-    // ]
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -43,9 +37,9 @@ const AnswerDetail = () =>{
                 ))}
             </ul>
             <div className={style.footerButtons}>
-                <Button onClick={clickPrevButton} variant="outlined">
-                ＜
-                </Button>
+                <FlatButton onClick={clickPrevButton} variant="outlined">
+                一覧に戻る
+                </FlatButton>
             </div>
         </div>
     )

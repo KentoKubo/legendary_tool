@@ -1,18 +1,20 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Button } from '@mui/material'
 import style from './AnswerSearch.module.scss'
+import Text from '../../components/Text'
 
 const AnswerSearch = () => {
   // [問題id，タイトル，[写真id，写真]，問題作成者名]
   const questions = [
-    { question_id: 0, title: "title0", photos: [{ photo_id: 0, photo: "photo0" }, { photo_id: 1, photo: "photo1" }], name: "name0" },
-    { question_id: 1, title: "title1", photos: [{ photo_id: 2, photo: "photo2" }, { photo_id: 3, photo: "photo3" }], name: "name1" },
-    { question_id: 2, title: "title2", photos: [{ photo_id: 4, photo: "photo4" }, { photo_id: 5, photo: "photo5" }], name: "name2" }
+    { question_id: 0, title: "title0", imgs: [{ img_id: 0, img: "img0" }, { img_id: 1, img: "img1" }], name: "name0" },
+    { question_id: 1, title: "title1", imgs: [{ img_id: 2, img: "img2" }, { img_id: 3, img: "img3" }], name: "name1" },
+    { question_id: 2, title: "title2", imgs: [{ img_id: 4, img: "img4" }, { img_id: 5, img: "img5" }], name: "name2" }
   ]
 
   const navigate = useNavigate()
+
+  const catName = (name) => `作成者：${name}`
 
   const clickBackButton = () => {
     navigate('/')
@@ -24,15 +26,27 @@ const AnswerSearch = () => {
 
   return (
     <div className={style.container}>
-      <Button onClick={clickBackButton} variant="outlined">メニューへ</Button>
-      <h1>回答検索画面</h1>
-      <input type="search" name="search" placeholder="キーワードを入力" />
+      <button type="button" className={style.backButton} onClick={clickBackButton} variant="outlined" >みりしら</button>
+      <input type="search" name="search" placeholder="テーマなどキーワードで入力" />
       <input type="submit" name="submit" value="検索" />
-      <div className={style.personImage}>image</div>
-      <ul>
+      <ul className={style.titles}>
         {questions.map(item => (
-            <li key={item.question_id}>Q{item.question_id+1} {item.title} <Button onClick={() => clickLookAnswerButton(item)} variant="outlined">見る</Button></li>
-        ))}
+          <li key={item.question_id}>
+            <button type="button" className={style.cards} onClick={() => clickLookAnswerButton(item)} onKeyDown={event => clickLookAnswerButton(event, item)}>
+              <div className={style.personImage}>
+                {item.imgs.map(img => (
+                  <Text text={img.img} />
+                // <img src={img.img} /> 
+                ))} 
+              </div> 
+              <div className={style.card_info}>
+                <Text text="テーマ：" style={{textAlign:'left', fontSize: '10px'}}/>
+                <Text text={item.title} style={{fontSize: '30px'}}/>
+                <Text text={catName(item.name)} style={{textAlign:'left', fontSize: '10px'}}/>
+              </div>
+            </button>
+          </li>
+          ))}
       </ul>
     </div>
   )

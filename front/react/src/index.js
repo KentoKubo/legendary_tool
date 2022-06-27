@@ -9,14 +9,14 @@ import SelectPerson from './pages/SelectPerson/SelectPerson'
 import QuestionList from './pages/QuestionList/QuestionList'
 import AnswerSelect from './pages/AnswerSelect/AnswerSelect'
 import AnswerSearch from './pages/AnswerSearch/AnswerSearch'
-import SearchProblems from './pages/SearchProblems/SearchProblems'
-import AnswerQuestions from './pages/AnswerQuestions/AnswerQuestions'
-import AnswerPreparation from './pages/AnswerPreparation/AnswerPreparation'
-import AnswerConfirmation from './pages/AnswerConfirmation/AnswerConfirmation'
-import Thanks from './pages/Thanks/Thanks'
-import ShareAnswers from './pages/ShareAnswers/ShareAnswers'
-import CreateQuestions from './pages/CreateQuestions/CreateQuestions'
-import AnswerList from './pages/AnswerList/AnswerList'
+// import SearchProblems from './pages/SearchProblems/SearchProblems'
+// import AnswerQuestions from './pages/AnswerQuestions/AnswerQuestions'
+// import AnswerPreparation from './pages/AnswerPreparation/AnswerPreparation'
+// import AnswerConfirmation from './pages/AnswerConfirmation/AnswerConfirmation'
+// import Thanks from './pages/Thanks/Thanks'
+// import ShareAnswers from './pages/ShareAnswers/ShareAnswers'
+// import CreateQuestions from './pages/CreateQuestions/CreateQuestions'
+// import AnswerList from './pages/AnswerList/AnswerList'
 
 const root = document.getElementById('root')
 ReactDOM.render(
@@ -27,14 +27,14 @@ ReactDOM.render(
       <Route path="/question-list" element={<QuestionList />} />
       <Route path="/answer-select" element={<AnswerSelect />} />
       <Route path="/answer-search" element={<AnswerSearch />} />
-      <Route path="/search-problems" element={<SearchProblems />} />
+      {/* <Route path="/search-problems" element={<SearchProblems />} />
       <Route path="/answer-questions" element={<AnswerQuestions />} />
       <Route path="/answer-preparation" element={<AnswerPreparation />} />
       <Route path="/answer-confirmation" element={<AnswerConfirmation />} />
       <Route path="/thanks" element={<Thanks />} />
       <Route path="/share-answers" element={<ShareAnswers />} />
       <Route path="/create-questions" element={<CreateQuestions />} />
-      <Route path="/answer-list" element={<AnswerList />} />
+      <Route path="/answer-list" element={<AnswerList />} /> */}
     </Routes>
   </Router>,
   root

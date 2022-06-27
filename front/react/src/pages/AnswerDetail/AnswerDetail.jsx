@@ -6,6 +6,7 @@ import style from './AnswerDetail.module.scss'
 import FlatButton from '../../components/FlatButton'
 
 const AnswerDetail = () =>{
+    //  [回答id，回答者名，回答日時，リアクション数][写真id, 回答テキスト]
     const answers = [
         { id: 0, question_id:0, answer: 'ans1'},
         { id: 1, question_id:0, answer: 'ans2'},
@@ -37,8 +38,8 @@ const AnswerDetail = () =>{
                 ))}
             </ul>
             <div className={style.footerButtons}>
-                <FlatButton onClick={clickPrevButton} variant="outlined">
-                一覧に戻る
+                <FlatButton onClick={clickPrevButton} variant="white">
+                一覧にもどる
                 </FlatButton>
             </div>
         </div>

@@ -1,40 +1,50 @@
 import React from 'react'
 import { useNavigate, useLocation  } from 'react-router-dom'
 
-import { Button } from '@mui/material'
+import FlatButton from '../../components/FlatButton'
+import Text from '../../components/Text'
 import style from './AnswerSelect.module.scss'
 
 const AnswerSelect = () => {
-  const answers = [
-    { answer_id: 0, answer_name: "name1", date: "2022-06-25", reaction: 3},
-    { answer_id: 1, answer_name: "name1", date: "2022-06-26", reaction: 4},
-    { answer_id: 2, answer_name: "name2", date: "2022-06-25", reaction: 5},
-    { answer_id: 3, answer_name: "name2", date: "2022-06-25", reaction: 6},
-    { answer_id: 4, answer_name: "name2", date: "2022-06-26", reaction: 7}
-  ]
 
   const navigate = useNavigate()
   const location = useLocation()
 
-  const {title} = location.state.title
+  const catName = (name) => `作成者：${name}`
 
   const clickBackButton = () => {
     navigate('/answer-search')
   }
-  const clickLookAnswerButton = (item) => {
-    navigate('/answer-detail', {state: {title: item} })
+  const clickMenuButton = () => {
+    navigate('/')
+  }
+
+  const clickYesButton = () => {
+    navigate('/answer-detail')
   }
 
   return (
     <div className={style.container}>
-      <button type="button" className={style.backButton} onClick={clickBackButton} variant="outlined" >みりしら</button>
-      <h1>回答選択画面</h1>
-      <h1>{title}</h1>
-      <ul>
-        {answers.map(item => (
-            <li key={item.answer_id}>A{item.answer_id+1} {item.reaction} {item.answer_name} <Button onClick={() => clickLookAnswerButton(title)} variant="outlined">答える</Button></li>
-        ))}
-      </ul>
+      <button type="button" className={style.menuButton} onClick={clickMenuButton} variant="outlined" >みりしら</button>
+      <div className={style.bodyContent}>
+        <div className={style.cards} >
+          <div className={style.personImage}>
+            {location.state.imgs.map(img => (
+              <Text text={img.img} />
+            ))} 
+          </div> 
+          <div className={style.card_info}>
+            <Text text="テーマ：" style={{textAlign:'left', fontSize: '10px'}}/>
+            <Text text={location.state.title} style={{fontSize: '30px'}}/>
+            <Text text={catName(location.state.name)} style={{textAlign:'left', fontSize: '10px'}}/>
+          </div>
+        </div>
+        <div className={style.buttons}>
+          <Text text="この問題であそびますか？"/>
+          <FlatButton text="はい！" onClick={clickYesButton} variant="outlined" />
+          <FlatButton text="選びなおす！" className={style.backButton} onClick={clickBackButton} variant="white" />
+        </div>
+      </div>
     </div>
   )
 }

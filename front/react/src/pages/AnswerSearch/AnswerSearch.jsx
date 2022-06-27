@@ -13,15 +13,15 @@ const AnswerSearch = () => {
   ]
 
   const navigate = useNavigate()
-
   const catName = (name) => `作成者：${name}`
+
 
   const clickBackButton = () => {
     navigate('/')
   }
 
-  const clickLookAnswerButton = (item) => {
-    navigate('/answer-select', {state: {title: item} })
+  const clickLookAnswerButton = (title, imgs, name) => {
+    navigate('/answer-select', {state: {title, imgs, name}})
   }
 
   return (
@@ -32,7 +32,7 @@ const AnswerSearch = () => {
       <ul className={style.titles}>
         {questions.map(item => (
           <li key={item.question_id}>
-            <button type="button" className={style.cards} onClick={() => clickLookAnswerButton(item)} onKeyDown={event => clickLookAnswerButton(event, item)}>
+            <button type="button" className={style.cards} onClick={() => clickLookAnswerButton(item.title, item.imgs, item.name)} onKeyDown={event => clickLookAnswerButton(event, item)}>
               <div className={style.personImage}>
                 {item.imgs.map(img => (
                   <Text text={img.img} />

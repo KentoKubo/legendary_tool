@@ -7,8 +7,8 @@ import reportWebVitals from './reportWebVitals'
 import Top from './pages/Top/Top'
 import SelectPerson from './pages/SelectPerson/SelectPerson'
 import QuestionList from './pages/QuestionList/QuestionList'
-import AnswerList from './pages/AnswerList/AnswerList'
-import AnswerDetail from './pages/AnswerDetail/AnswerDetail'
+import AnswerSelect from './pages/AnswerSelect/AnswerSelect'
+import AnswerSearch from './pages/AnswerSearch/AnswerSearch'
 
 const root = document.getElementById('root')
 ReactDOM.render(
@@ -17,8 +17,8 @@ ReactDOM.render(
       <Route path="/" element={<Top />} />
       <Route path="/select-person" element={<SelectPerson />} />
       <Route path="/question-list" element={<QuestionList />} />
-      <Route path="/answer-list" element={<AnswerList />} />
-      <Route path="/answer-detail" element={<AnswerDetail />} />
+      <Route path="/answer-select" element={<AnswerSelect />} />
+      <Route path="/answer-search" element={<AnswerSearch />} />
     </Routes>
   </Router>,
   root

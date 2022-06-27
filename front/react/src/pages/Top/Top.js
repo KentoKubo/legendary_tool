@@ -10,7 +10,7 @@ const Top = () => (
       <p>ミリしらプラットフォーム</p>
       <Link to="/select-person"> Select Person </Link>
       <Link to="/question-list"> Question List </Link>
-      <Link to="/answer-list"> Answer List </Link>
+      <Link to="/answer-search"> Answer Search </Link>
     </header>
   </div>
 )

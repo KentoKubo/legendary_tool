@@ -10,7 +10,7 @@ class Question(models.Model):
 
 class Picture(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    file_path = models.CharField(max_length=255) # TODO: survey how to save pictures
+    file_path = models.ImageField(upload_to="images/") # 画像ファイルのパス images/xxxxx.png
 
 
 class Answer(models.Model):

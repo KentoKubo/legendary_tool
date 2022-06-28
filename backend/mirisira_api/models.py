@@ -3,8 +3,8 @@ from django.db import models
 # Create your models here.
 
 class Question(models.Model):
-    title = models.CharField(max_length=31)
-    creator_name = models.CharField(max_length=31)
+    title = models.CharField(max_length=15)
+    creator_name = models.CharField(max_length=15)
     create_at = models.DateTimeField(auto_now_add=True)
 
 
@@ -15,7 +15,7 @@ class Picture(models.Model):
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    answerer_name = models.CharField(max_length=31)
+    answerer_name = models.CharField(max_length=15)
     create_at = models.DateTimeField(auto_now_add=True)
 
 
@@ -23,8 +23,8 @@ class OneCharacterAnswer(models.Model):
     picture = models.ForeignKey(Picture, on_delete=models.CASCADE)
     answer = models.ForeignKey(
         Answer, related_name="characters", on_delete=models.CASCADE)
-    character_name = models.CharField(max_length=31)
-    character_explanation = models.TextField()
+    character_name = models.CharField(max_length=11)
+    character_explanation = models.CharField(max_length=30)
 
 
 # feat/2/define-model

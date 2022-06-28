@@ -19,7 +19,6 @@ paths:
             application/json:
                 schema:
                   $ref: '#/components/schemas/TestGetResponse'
-  
   /questions/:
     get:
       summary: 問題一覧を取得するAPI
@@ -53,6 +52,24 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/QuestionsPostRequest'
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                title:
+                  description: "タイトル"
+                  type: string
+                  example: "鬼滅の刃 ミリしら"
+                pictures:
+                  type: array
+                  description: "画像ファイル"
+                  items:
+                    type: string
+                    format: binary
+                creator_name:
+                  description: "作成者名"
+                  type: string
+
         required: true
       responses:
         200:
@@ -137,6 +154,8 @@ components:
           type: string
           description: 問題のタイトル
           example: 鬼滅の刃 ミリしら
+          maxLength: 15
+          minLength: 1
         pictures:
           type: array
           items:
@@ -147,6 +166,8 @@ components:
         creator_name:
           type: string
           example: hk
+          maxLength: 15
+          minLength: 1
           description: 問題作成者名
 
 
@@ -173,6 +194,8 @@ components:
         answerer_name:
           type: string
           example: hira
+          maxLength: 15
+          minLength: 1
           description: 回答者名
 
     AnswerGetResponse:
@@ -195,6 +218,8 @@ components:
           type: string
           example: 鬼滅の刃 ミリしら
           description: 問題のタイトル
+          maxLength: 15
+          minLength: 1
         pictures:
           type: array
           items:
@@ -204,9 +229,11 @@ components:
           type: string
           example: hk
           description: 問題作成者名
+          maxLength: 15
+          minLength: 1
         create_at:
           type: string
-          example: '2022-01-31T23:59'
+          example: '2022-06-28T06:47:20.347612Z'
           format: date-time
           description: 回答日時
 
@@ -233,9 +260,11 @@ components:
           type: string
           example: hira
           description: 回答者名
+          maxLength: 15
+          minLength: 1
         create_at:
           type: string
-          example: '2022-01-31T23:59'
+          example: '2022-06-28T06:47:20.347612Z'
           format: date-time
           description: 回答日時
           
@@ -249,7 +278,11 @@ components:
           type: string
           example: 炭治郎
           description: 画像に対する名前
+          maxLength: 11
+          minLength: 1
         character_explanation:
           type: string
           example: 優しい人で強い
+          maxLength: 30
+          minLength: 1
           description: 画像に対する説明

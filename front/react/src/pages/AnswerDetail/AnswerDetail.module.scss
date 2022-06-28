@@ -1,0 +1,13 @@
+.container {
+    margin: 32px auto;
+    width: 80%;
+    text-align: center;
+  }
+  
+  .questionForm {
+    margin: 36px 0;
+  
+    & .answerInput {
+      width: 66%;
+    }
+  }

@@ -5,6 +5,11 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 
 import Top from './pages/Top/Top'
+import SelectPerson from './pages/SelectPerson/SelectPerson'
+import QuestionList from './pages/QuestionList/QuestionList'
+import AnswerSelect from './pages/AnswerSelect/AnswerSelect'
+import AnswerSearch from './pages/AnswerSearch/AnswerSearch'
+import AnswerDetail from './pages/AnswerDetail/AnswerDetail'
 import SearchProblems from './pages/SearchProblems/SearchProblems'
 import AnswerQuestions from './pages/AnswerQuestions/AnswerQuestions'
 import AnswerPreparation from './pages/AnswerPreparation/AnswerPreparation'
@@ -19,6 +24,11 @@ ReactDOM.render(
   <Router>
     <Routes>
       <Route path="/" element={<Top />} />
+      <Route path="/select-person" element={<SelectPerson />} />
+      <Route path="/question-list" element={<QuestionList />} />
+      <Route path="/answer-select" element={<AnswerSelect />} />
+      <Route path="/answer-search" element={<AnswerSearch />} />
+      <Route path="/answer-detail" element={<AnswerDetail />} />
       <Route path="/search-problems" element={<SearchProblems />} />
       <Route path="/answer-questions" element={<AnswerQuestions />} />
       <Route path="/answer-preparation" element={<AnswerPreparation />} />
@@ -26,7 +36,7 @@ ReactDOM.render(
       <Route path="/thanks" element={<Thanks />} />
       <Route path="/share-answers" element={<ShareAnswers />} />
       <Route path="/create-questions" element={<CreateQuestions />} />
-      <Route path="/answer-list" element={<AnswerList />} />
+      <Route path="/answer-list" element={<AnswerList />} /> 
     </Routes>
   </Router>,
   root

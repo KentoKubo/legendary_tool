@@ -36,7 +36,7 @@ ReactDOM.render(
       <Route path="/thanks" element={<Thanks />} />
       <Route path="/share-answers" element={<ShareAnswers />} />
       <Route path="/create-questions" element={<CreateQuestions />} />
-      <Route path="/answer-list" element={<AnswerList />} /> 
+      <Route path="/answer-list" element={<AnswerList />} />
     </Routes>
   </Router>,
   root

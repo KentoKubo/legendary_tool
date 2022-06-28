@@ -5,6 +5,8 @@ import { Box, TextField } from '@mui/material'
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
 
+/* eslint no-alert: 0 */
+
 const InputAnswererName = () => {
   const [answererName, setAnswererName] = useState('')
 

@@ -16,6 +16,8 @@ import pic4 from '../../images/pic4.png'
 import pic5 from '../../images/pic5.png'
 import pic6 from '../../images/pic6.png'
 
+/* eslint no-console: 0 */
+
 const SearchQuestions = () => {
   const questions = [
     {

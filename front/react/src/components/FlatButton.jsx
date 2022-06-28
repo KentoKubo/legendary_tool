@@ -4,7 +4,7 @@ import { Box, Button } from '@mui/material'
 import Text from './Text'
 
 const FlatButton = (props) => {
-  const { text, onClick, variant } = props
+  const { text, onClick, variant, disabled } = props
 
   return (
     <Box sx={{ m: 4, textAlign: 'center' }}>
@@ -23,6 +23,7 @@ const FlatButton = (props) => {
               borderWidth: '2px',
             },
           }}
+          disabled={disabled}
         >
           <Text text={text} align="center" />
         </Button>
@@ -41,6 +42,7 @@ const FlatButton = (props) => {
               borderWidth: '2px',
             },
           }}
+          disabled={disabled}
         >
           <Text text={text} align="center" />
         </Button>

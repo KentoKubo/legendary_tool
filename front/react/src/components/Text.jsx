@@ -5,7 +5,7 @@ const Text = (props) => {
   const { text, style, align } = props
 
   return (
-    <Typography fontFamily="Noto Sans JP, sans-serif" sx={style} align={align}>
+    <Typography component="p" fontFamily="Noto Sans JP, sans-serif" sx={style} align={align}>
       {text}
     </Typography>
   )

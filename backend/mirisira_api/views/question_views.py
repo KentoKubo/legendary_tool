@@ -28,13 +28,7 @@ class QuestionList(generics.ListCreateAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        
-        data = list()
-        for question in queryset:
-            pictures = Picture.objects.filter(question_id=question.id)
-            data.append({'question_id':question.id,'title':question.title,'pictures':pictures,'creator_name':question.creator_name,'create_at':question.create_at})
-
-        serializer = self.get_serializer(data,many=True)
+        serializer = self.get_serializer(queryset, many=True)
         return Response({"questions": serializer.data})
 
 
@@ -51,15 +45,14 @@ class QuestionList(generics.ListCreateAPIView):
             }
             pictures = request.FILES.getlist('pictures',None)
             question_serializer = QuestionPostSerializer(data=question_info)
-            
+
         with transaction.atomic():
             if question_serializer.is_valid():
                 data = question_serializer.create(question_info)
 
             pictures_serializer = PictureSerializer(data=[{'question':data,'picture':picture} for picture in pictures],many=True)
             if pictures_serializer.is_valid():
-                pictures_serializer.save()
-                # pictures_serializer.create([{'question':data,'picture':picture} for picture in pictures])
+                pictures_serializer.create([{'question':data,'picture':picture} for picture in pictures])
 
         return JsonResponse({}, status=status.HTTP_201_CREATED)
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Container, Box, Grid, TextField } from '@mui/material'
+import { Image } from 'mui-image'
 
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
@@ -16,15 +17,18 @@ const AnswerPreparation = () => {
     navigate('/answer-questions', { state: { questionItem: _questionItem, answererName } })
   }
 
+  console.log(questionItem)
   return (
     <Container sx={{ paddingTop: '120px' }}>
       <Text text={`テーマ : ${questionItem.title}`} align="center" style={{ mb: 2 }} />
       <Box sx={{ mx: '20%' }}>
-        <Grid container sx={{ border: '1px solid #545454' }}>
+        <Grid container sx={{ backgroundColor: '#fff' }}>
           {questionItem.pictures.map((item) => (
             <Grid item sm={4} key={item.picture_id}>
               <Box>
-                <Box sx={{ border: '1px solid #545454' }}>{item.picture}</Box>
+                <Box sx={{ border: '1px solid #545454', height: '120px' }}>
+                  <Image src={item.picture} height="100%" />
+                </Box>
                 <TextField
                   disabled
                   sx={{ fieldset: { borderColor: '#545454 !important', borderRadius: '0px' } }}

@@ -18,12 +18,16 @@ const InputAnswererName = () => {
   }
 
   const moveToAnswerPreparation = () => {
-    navigate('/answer-preparation', { state: { questionItem, answererName } })
+    if (answererName.length > 15) {
+      alert(`15文字以内で入力してください : 現在${answererName.length}文字です`)
+    } else if (answererName.length === 0) {
+      alert('なまえを入力してください')
+    } else navigate('/answer-preparation', { state: { questionItem, answererName } })
   }
 
   return (
     <Box sx={{ textAlign: 'center', paddingTop: '240px' }}>
-      <Text text="あなたのお名前は？" style={{ mb: 3 }} align="center" />
+      <Text text="あなたのお名前は？(15文字以内)" style={{ mb: 3 }} align="center" />
       <TextField
         value={answererName}
         onChange={handleChange}
@@ -41,6 +45,8 @@ const InputAnswererName = () => {
           },
           '& .MuiFilledInput-input': {
             padding: '16px 12px',
+            '&:focus': { backgroundColor: '#fff' },
+            '&:active': { backgroundColor: '#fff' },
           },
         }}
       />

@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 // import axios from 'axios'
 import { Container, Grid, Box } from '@mui/material'
+import { Image } from 'mui-image'
 
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
@@ -25,12 +26,14 @@ const AnswerConfirmation = () => {
         <Grid container>
           {questions.pictures.map((item, idx) => (
             <Grid item sm={4} key={item.picture_id}>
-              <Box sx={{ border: '1px solid #545454' }}>
-                <Box sx={{ textAlign: 'center', border: '1px solid' }}>{item.picture}</Box>
-                <Box sx={{ px: 1, border: '1px solid #545454' }}>
+              <Box sx={{ border: '1px solid #545454', backgroundColor: '#fff' }}>
+                <Box sx={{ textAlign: 'center', border: '1px solid' }}>
+                  <Image src={item.picture} height="100%" />
+                </Box>
+                <Box sx={{ p: 1, border: '1px solid #545454', height: '1.5em' }}>
                   <Text text={answers[idx].character_name} align="center" />
                 </Box>
-                <Box sx={{ px: 1, border: '1px solid #545454' }}>
+                <Box sx={{ p: 1, border: '1px solid #545454', height: '4.5em' }}>
                   <Text text={answers[idx].character_explanation} />
                 </Box>
               </Box>

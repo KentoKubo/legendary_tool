@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Container, Box, TextField, CircularProgress } from '@mui/material'
+import { Image } from 'mui-image'
 
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
@@ -20,6 +21,25 @@ const AnswerQuestions = () => {
   const [progress, setProgress] = useState(0)
 
   const navigate = useNavigate()
+
+  const validateForm = () => {
+    if (name.length > 11 && explanation > 30) {
+      alert('キャラクター名は11文字以内・ひとことは30文字以内で入力してください')
+    } else if (name.length > 15) {
+      alert('キャラクター名は11文字以内で入力してください')
+    } else if (explanation.length > 30) {
+      alert('ひとことは30文字以内で入力してください')
+    } else if (name.length === 0 && explanation.length === 0) {
+      alert('キャラクター名とひとことを入力してください')
+    } else if (name.length === 0) {
+      alert('キャラクター名を入力してください')
+    } else if (explanation.length === 0) {
+      alert('ひとことを入力してください')
+    } else {
+      return true
+    }
+    return false
+  }
 
   const popFromAnswerList = () => {
     const newAnswerList = [...answerList]
@@ -48,7 +68,15 @@ const AnswerQuestions = () => {
   }
 
   const clickNextButton = () => {
-    if (currentPictureNumber === questionItem.pictures.length - 1) {
+    if (validateForm()) {
+      addToAnswerList()
+      setCurrentPicture(questionItem.pictures[currentPictureNumber + 1])
+      setCurrentPictureNumber(currentPictureNumber + 1)
+    }
+  }
+
+  const clickConfirmButton = () => {
+    if (validateForm()) {
       const newAnswerList = [
         ...answerList,
         {
@@ -58,16 +86,12 @@ const AnswerQuestions = () => {
         },
       ]
       navigate('/answer-confirmation', { state: { questions: questionItem, answers: newAnswerList, answererName } })
-    } else {
-      addToAnswerList()
-      setCurrentPicture(questionItem.pictures[currentPictureNumber + 1])
-      setCurrentPictureNumber(currentPictureNumber + 1)
     }
   }
 
   const onChangeName = useCallback((event) => setName(event.target.value), [setName])
 
-  const onChangeExplanation = useCallback((event) => setExplanation(event.target.value), [explanation])
+  const onChangeExplanation = useCallback((event) => setExplanation(event.target.value), [setExplanation])
 
   const finishTimer = () => {
     clickNextButton()
@@ -86,12 +110,14 @@ const AnswerQuestions = () => {
 
   return (
     <Container container sx={{ width: '60%', paddingTop: '120px' }}>
-      <Box sx={{ textAlign: 'center', mb: 2 }}>
+      <Box sx={{ textAlign: 'center', mb: 4 }}>
         <CircularProgress variant="determinate" value={progress} />
       </Box>
       <Box sx={{ display: 'flex' }}>
-        <Box sx={{ width: '40%', border: '1px solid #545454' }}>{currentPicture.picture}</Box>
-        <Box sx={{ width: '60%', px: 2 }}>
+        <Box sx={{ width: '40%', border: '1px solid #545454' }}>
+          <Image src={currentPicture.picture} />
+        </Box>
+        <Box sx={{ width: '60%', px: 4 }}>
           <Box>
             <Text text="キャラクター名を入力" style={{ mb: 1 }} />
             <TextField
@@ -123,7 +149,11 @@ const AnswerQuestions = () => {
         ) : (
           <FlatButton onClick={clickPrevButton} text="前の問題へ" variant="white" disabled="true" />
         )}
-        <FlatButton onClick={() => clickNextButton()} text="つぎへ" variant="black" />
+        {currentPictureNumber < questionItem.pictures.length - 1 ? (
+          <FlatButton onClick={() => clickNextButton()} text="つぎへ" variant="black" />
+        ) : (
+          <FlatButton onClick={() => clickConfirmButton()} text="回答を確認" variant="black" />
+        )}
       </Box>
     </Container>
   )

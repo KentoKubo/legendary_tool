@@ -46,7 +46,7 @@ class QuestionList(generics.ListCreateAPIView):
             pictures = request.FILES.getlist('pictures',None)
             ALLOW_CONTENT_TYPE = ['image/png','image/jpeg','image/gif']
             for picture in pictures:
-                if (picture.content_type in ALLOW_CONTENT_TYPE)  == False:
+                if picture.content_type  not in ALLOW_CONTENT_TYPE:
                     return JsonResponse({"message": "Only image files can be uploaded"}, status=status.HTTP_400_BAD_REQUEST)
 
             question_serializer = QuestionPostSerializer(data=question_info)
@@ -55,7 +55,7 @@ class QuestionList(generics.ListCreateAPIView):
             # raise ValidationError('Image file is missing')
             return JsonResponse({"message": "Image file is missing."}, status=status.HTTP_400_BAD_REQUEST)
         elif len(pictures) > 10:
-            return JsonResponse({"message": "Image files should be less than 10."}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"message": "Image files should be no more than 10."}, status=status.HTTP_400_BAD_REQUEST)
 
         with transaction.atomic():
             if question_serializer.is_valid(raise_exception=True):

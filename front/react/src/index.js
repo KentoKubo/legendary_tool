@@ -8,10 +8,10 @@ import Top from './pages/Top/Top'
 import AnswerSelect from './pages/AnswerSelect/AnswerSelect'
 import AnswerSearch from './pages/AnswerSearch/AnswerSearch'
 import AnswerDetail from './pages/AnswerDetail/AnswerDetail'
+import AnswerQuestions from './pages/AnswerQuestions/AnswerQuestions'
 import SearchQuestions from './pages/SearchQuestions/SearchQuestions'
 import InputAnswererName from './pages/InputAnswererName/InputAnswererName'
 import AnswerPreparation from './pages/AnswerPreparation/AnswerPreparation'
-import AnswerQuestions from './pages/AnswerQuestions/AnswerQuestions'
 import AnswerConfirmation from './pages/AnswerConfirmation/AnswerConfirmation'
 import Thanks from './pages/Thanks/Thanks'
 import CreateQuestions from './pages/CreateQuestions/CreateQuestions'
@@ -39,6 +39,9 @@ ReactDOM.render(
           <Route path="/thanks" element={<Thanks />} />
           <Route path="/create-questions" element={<CreateQuestions />} />
           <Route path="/answer-list" element={<AnswerList />} />
+          <Route path="/answer-select" element={<AnswerSelect />} />
+          <Route path="/answer-search" element={<AnswerSearch />} />
+          <Route path="/answer-detail" element={<AnswerDetail />} />
         </Routes>
       </Router>
     </div>

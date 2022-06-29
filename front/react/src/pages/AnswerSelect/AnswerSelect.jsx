@@ -19,8 +19,8 @@ const AnswerSelect = () => {
     navigate('/')
   }
 
-  const clickYesButton = () => {
-    navigate('/answer-detail')
+  const clickYesButton = (title, imgs, name) => {
+    navigate('/answer-detail', {state: {title, imgs, name}})
   }
 
   return (
@@ -41,7 +41,7 @@ const AnswerSelect = () => {
         </div>
         <div className={style.buttons}>
           <Text text="この問題であそびますか？"/>
-          <FlatButton text="はい！" onClick={clickYesButton} variant="outlined" />
+          <FlatButton text="はい！" onClick={() => clickYesButton(location.state.title, location.state.imgs, location.state.name)} variant="outlined" />
           <FlatButton text="選びなおす！" className={style.backButton} onClick={clickBackButton} variant="white" />
         </div>
       </div>

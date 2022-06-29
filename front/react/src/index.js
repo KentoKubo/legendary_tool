@@ -5,6 +5,9 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 
 import Top from './pages/Top/Top'
+import AnswerSelect from './pages/AnswerSelect/AnswerSelect'
+import AnswerSearch from './pages/AnswerSearch/AnswerSearch'
+import AnswerDetail from './pages/AnswerDetail/AnswerDetail'
 import SearchQuestions from './pages/SearchQuestions/SearchQuestions'
 import InputAnswererName from './pages/InputAnswererName/InputAnswererName'
 import AnswerPreparation from './pages/AnswerPreparation/AnswerPreparation'
@@ -26,6 +29,9 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<Top />} />
           <Route path="/search-problems" element={<SearchQuestions />} />
+          <Route path="/answer-select" element={<AnswerSelect />} />
+          <Route path="/answer-search" element={<AnswerSearch />} />
+          <Route path="/answer-detail" element={<AnswerDetail />} />
           <Route path="/input-answerer-name" element={<InputAnswererName />} />
           <Route path="/answer-preparation" element={<AnswerPreparation />} />
           <Route path="/answer-questions" element={<AnswerQuestions />} />

@@ -7,8 +7,6 @@ import { Image } from 'mui-image'
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
 
-/* eslint no-console: 0 */
-
 const AnswerConfirmation = () => {
   const location = useLocation()
   const navigate = useNavigate()

@@ -1,0 +1,59 @@
+.container {
+    margin: 32px auto;
+    width: 80%;
+    text-align: center;
+}
+
+.questionForm {
+    margin: 36px 0;
+
+    & .answerInput {
+        width: 66%;
+    }
+}
+
+.footerButtons {
+    display: flex;
+    justify-content: space-around;
+}
+
+ul {
+    list-style: none;
+}
+
+.menuButton{
+    color: #111;
+    border: none;
+    background-color: transparent;
+}  
+
+.backButton{
+    background-color: #fff;
+}
+
+.cards{
+    border-radius: 10px;
+    background-color: #fff;
+    margin: auto;
+    width: 500px;
+    height: 500px;
+    border: 1px solid #000;
+}
+
+.card_info{
+    border-top: 1px solid #000;
+}
+
+.personImage{
+    height: 400px;
+}
+
+.bodyContent{
+    display: flex;
+}
+
+.buttons{
+    align-self: center;
+}
+
+  

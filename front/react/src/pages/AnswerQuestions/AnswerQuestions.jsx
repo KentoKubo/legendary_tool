@@ -7,9 +7,6 @@ import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
 import ProgressCircle from './ProgressCircle'
 
-/* eslint no-alert: 0 */
-/* eslint no-console: 0 */
-
 const AnswerQuestions = () => {
   const location = useLocation()
   const { state } = location

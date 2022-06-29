@@ -24,6 +24,7 @@ module.exports = {
     ],
     'import/no-unresolved': 'off',
     'react/prop-types': 'off',
+    'no-template-curly-in-string': 'off'
   },
   settings: {
     'import/extensions': ['.js', '.jsx'],

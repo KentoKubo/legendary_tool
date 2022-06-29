@@ -47,7 +47,7 @@ class QuestionList(generics.ListCreateAPIView):
             ALLOW_CONTENT_TYPE = ['image/png','image/jpeg','image/gif']
             for picture in pictures:
                 if (picture.content_type in ALLOW_CONTENT_TYPE)  == False:
-                    raise ValidationError('Only image files can be uploaded')
+                    return JsonResponse({"message": "Only image files can be uploaded"}, status=status.HTTP_400_BAD_REQUEST)
 
             question_serializer = QuestionPostSerializer(data=question_info)
 

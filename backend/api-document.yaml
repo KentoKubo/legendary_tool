@@ -74,6 +74,10 @@ paths:
       responses:
         200:
           description: A successful response.                
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionsPostResponse'
   
   
   /answers/:
@@ -109,6 +113,10 @@ paths:
       responses:
         200:
           description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnswersPostResponse'
 
   /answers/{answer_id}/:
     get:
@@ -170,6 +178,12 @@ components:
           minLength: 1
           description: 問題作成者名
 
+    QuestionsPostResponse:
+      type: object
+      properties:
+        question_id:
+          type: integer
+          description: 登録した問題のID
 
     AnswersGetResponse:
       type: object
@@ -197,6 +211,13 @@ components:
           maxLength: 15
           minLength: 1
           description: 回答者名
+
+    AnswersPostResponse:
+      type: object
+      properties:
+        answer_id:
+          type: integer
+          description: 登録した回答のID
 
     AnswerGetResponse:
       type: object

@@ -30,12 +30,14 @@ class AnswerGetSerializer(serializers.ModelSerializer):
 
 
 class AnswerPostSerializer(serializers.ModelSerializer):
-    question_id = serializers.IntegerField()
-    characters = OneCharacterAnswerSerializer(many=True)
+    answer_id = serializers.IntegerField(source="id", read_only=True)
+    question_id = serializers.IntegerField(write_only=True)
+    answerer_name = serializers.CharField(max_length=15, write_only=True)
+    characters = OneCharacterAnswerSerializer(many=True, write_only=True)
 
     class Meta:
         model = Answer
-        fields = ["question_id", "answerer_name", "characters"]
+        fields = ["answer_id", "question_id", "answerer_name", "characters"]
 
     def create(self, validated_data):
         one_character_answers_data = validated_data.pop("characters")

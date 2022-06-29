@@ -54,6 +54,6 @@ class QuestionList(generics.ListCreateAPIView):
             if pictures_serializer.is_valid():
                 pictures_serializer.create([{'question':data,'picture':picture} for picture in pictures])
 
-        return JsonResponse({}, status=status.HTTP_201_CREATED)
+        return JsonResponse({"question_id": data.id}, status=status.HTTP_201_CREATED)
 
 

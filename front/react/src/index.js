@@ -16,6 +16,8 @@ import AnswerConfirmation from './pages/AnswerConfirmation/AnswerConfirmation'
 import Thanks from './pages/Thanks/Thanks'
 import AnswerList from './pages/AnswerList/AnswerList'
 import UploadImages from './pages/UploadImages/UploadImages'
+import InputTitle from './pages/InputTitle/InputTitle'
+import CreateConfirmation from './pages/CreateConfirmation/CreateConfirmation'
 
 const root = document.getElementById('root')
 ReactDOM.render(
@@ -29,9 +31,6 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<Top />} />
           <Route path="/search-problems" element={<SearchQuestions />} />
-          <Route path="/answer-select" element={<AnswerSelect />} />
-          <Route path="/answer-search" element={<AnswerSearch />} />
-          <Route path="/answer-detail" element={<AnswerDetail />} />
           <Route path="/input-name" element={<InputName />} />
           <Route path="/answer-preparation" element={<AnswerPreparation />} />
           <Route path="/answer-questions" element={<AnswerQuestions />} />
@@ -42,6 +41,8 @@ ReactDOM.render(
           <Route path="/answer-search" element={<AnswerSearch />} />
           <Route path="/answer-detail" element={<AnswerDetail />} />
           <Route path="/upload-images" element={<UploadImages />} />
+          <Route path="/input-title" element={<InputTitle />} />
+          <Route path="/create-confirmation" element={<CreateConfirmation />} />
         </Routes>
       </Router>
     </div>

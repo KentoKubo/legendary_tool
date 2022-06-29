@@ -17,7 +17,7 @@ const InputName = () => {
     setName(event.target.value)
   }
 
-  const validateName = () =>{
+  const validateName = () => {
     if (name.length > 15) {
       alert(`15文字以内で入力してください : 現在${name.length}文字です`)
     } else if (name.length === 0) {
@@ -28,10 +28,10 @@ const InputName = () => {
 
   const moveToAnswerPreparation = () => {
     if (validateName()) {
-      if (from === "create") {
-        navigate('/upload-images', { state: { creatorName: name }})
+      if (from === 'create') {
+        navigate('/upload-images', { state: { creatorName: name } })
       }
-      if (from === "answer") {
+      if (from === 'answer') {
         navigate('/answer-preparation', { state: { questionItem, answererName: name } })
       }
     }

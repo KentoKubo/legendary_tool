@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import SearchIcon from '@mui/icons-material/Search'
+import { Paper, Box, InputBase } from '@mui/material'
 import style from './AnswerSearch.module.scss'
 import Text from '../../components/Text'
 
@@ -27,8 +29,23 @@ const AnswerSearch = () => {
   return (
     <div className={style.container}>
       <button type="button" className={style.backButton} onClick={clickBackButton} variant="outlined" >みりしら</button>
-      <input type="search" name="search" placeholder="テーマなどキーワードで入力" />
-      <input type="submit" name="submit" value="検索" />
+      <Box sx={{ marginBottom: '24px' }}>
+        <Paper
+          elevation={0}
+          sx={{
+            display: 'flex',
+            px: 4,
+            py: 2,
+            alignItems: 'center',
+            border: '2px solid #545454',
+            borderRadius: '100vh',
+          }}
+        >
+          <SearchIcon/>
+          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="テーマやキーワードで検索" />
+        </Paper>
+      </Box>
+      {/* <input type="submit" name="submit" value="検索" /> */}
       <ul className={style.titles}>
         {questions.map(item => (
           <li key={item.question_id}>

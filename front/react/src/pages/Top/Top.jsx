@@ -26,7 +26,7 @@ const Top = () => {
           }}
         />
         <FlatButton text="答えてあそぶ！" variant="white" onClick={() => navigate('/search-problems')} />
-        <FlatButton text="見てあそぶ！" variant="white" onClick={() => navigate('/answer-list')} />
+        <FlatButton text="見てあそぶ！" variant="white" onClick={() => navigate('/answer-search')} />
       </Box>
     </Box>
   )

@@ -1,5 +1,5 @@
 # for question view
-
+from rest_framework.exceptions import ValidationError
 from rest_framework.views import APIView
 from django.http import JsonResponse
 from django.db import transaction  
@@ -44,14 +44,25 @@ class QuestionList(generics.ListCreateAPIView):
                 'creator_name':request.POST.get('creator_name',None),
             }
             pictures = request.FILES.getlist('pictures',None)
+            ALLOW_CONTENT_TYPE = ['image/png','image/jpeg','image/gif']
+            for picture in pictures:
+                if picture.content_type  not in ALLOW_CONTENT_TYPE:
+                    return JsonResponse({"message": "Only image files can be uploaded"}, status=status.HTTP_400_BAD_REQUEST)
+
             question_serializer = QuestionPostSerializer(data=question_info)
 
+        if len(pictures) < 1:
+            # raise ValidationError('Image file is missing')
+            return JsonResponse({"message": "Image file is missing."}, status=status.HTTP_400_BAD_REQUEST)
+        elif len(pictures) > 10:
+            return JsonResponse({"message": "Image files should be no more than 10."}, status=status.HTTP_400_BAD_REQUEST)
+
         with transaction.atomic():
-            if question_serializer.is_valid():
+            if question_serializer.is_valid(raise_exception=True):
                 data = question_serializer.create(question_info)
 
             pictures_serializer = PictureSerializer(data=[{'question':data,'picture':picture} for picture in pictures],many=True)
-            if pictures_serializer.is_valid():
+            if pictures_serializer.is_valid(raise_exception=True):
                 pictures_serializer.create([{'question':data,'picture':picture} for picture in pictures])
 
         return JsonResponse({"question_id": data.id}, status=status.HTTP_201_CREATED)

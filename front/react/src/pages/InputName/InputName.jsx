@@ -5,31 +5,43 @@ import { Box, TextField } from '@mui/material'
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
 
-const InputAnswererName = () => {
-  const [answererName, setAnswererName] = useState('')
+const InputName = () => {
+  const [name, setName] = useState('')
 
   const location = useLocation()
   const navigate = useNavigate()
 
-  const { questionItem } = location.state
+  const { questionItem, from } = location.state
 
   const handleChange = (event) => {
-    setAnswererName(event.target.value)
+    setName(event.target.value)
+  }
+
+  const validateName = () =>{
+    if (name.length > 15) {
+      alert(`15文字以内で入力してください : 現在${name.length}文字です`)
+    } else if (name.length === 0) {
+      alert('なまえを入力してください')
+    } else return true
+    return false
   }
 
   const moveToAnswerPreparation = () => {
-    if (answererName.length > 15) {
-      alert(`15文字以内で入力してください : 現在${answererName.length}文字です`)
-    } else if (answererName.length === 0) {
-      alert('なまえを入力してください')
-    } else navigate('/answer-preparation', { state: { questionItem, answererName } })
+    if (validateName()) {
+      if (from === "create") {
+        navigate('/upload-images', { state: { creatorName: name }})
+      }
+      if (from === "answer") {
+        navigate('/answer-preparation', { state: { questionItem, answererName: name } })
+      }
+    }
   }
 
   return (
     <Box sx={{ textAlign: 'center', paddingTop: '240px' }}>
       <Text text="あなたのお名前は？(15文字以内)" style={{ mb: 3 }} align="center" />
       <TextField
-        value={answererName}
+        value={name}
         onChange={handleChange}
         variant="filled"
         autoComplete="off"
@@ -55,4 +67,4 @@ const InputAnswererName = () => {
   )
 }
 
-export default InputAnswererName
+export default InputName

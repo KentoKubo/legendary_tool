@@ -111,7 +111,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3030',
+    'http://127.0.0.1:3333',
+    'http://localhost:3000',
+    'http://localhost:3030',
+    'http://localhost:3333',
 ]
 
 # Internationalization

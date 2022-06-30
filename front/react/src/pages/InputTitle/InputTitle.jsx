@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Box, TextField } from '@mui/material'
+import { Box, TextField, ImageList, ImageListItem } from '@mui/material'
+import Image from 'mui-image'
 
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
@@ -12,6 +13,8 @@ const InputTitle = () => {
   const navigate = useNavigate()
 
   const { images, creatorName } = location.state
+
+  console.log(images[0])
 
   const handleChange = (event) => {
     setTitle(event.target.value)
@@ -47,11 +50,26 @@ const InputTitle = () => {
           sx={{
             width: '50%',
             mx: 4,
-            border: '2px solid #545454',
-            borderRadius: '4px',
-            background: '#fff',
           }}
-        />
+        >
+          <ImageList
+            cols={3}
+            gap={0}
+            sx={{
+              border: '2px solid #545454',
+              borderRadius: '4px',
+              width: '100%',
+              backgroundColor: '#fff',
+              '::-webkit-scrollbar': { display: 'none' },
+            }}
+          >
+            {images.map((item) => (
+              <ImageListItem key="a" sx={{ margin: '0 0 -1px -1px' }}>
+                <Image src={URL.createObjectURL(item)} style={{ width: '100%', margin: 'auto' }} />
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </Box>
         <Box sx={{ width: '50%' }}>
           <Text text="この問題のタイトルは？" style={{ mb: 3, color: '#545454' }} align="left" />
           <TextField

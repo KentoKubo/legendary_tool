@@ -28,9 +28,13 @@ const Top = () => {
         <FlatButton
           text="答えてあそぶ！"
           variant="white"
-          onClick={() => navigate('/search-problems', { state: { from: 'answer' } })}
+          onClick={() => navigate('/search-questions', { state: { from: 'answer' } })}
         />
-        <FlatButton text="見てあそぶ！" variant="white" onClick={() => navigate('/answer-search')} />
+        <FlatButton
+          text="見てあそぶ！"
+          variant="white"
+          onClick={() => navigate('/search-questions', { state: { from: 'see' } })}
+        />
       </Box>
     </Box>
   )

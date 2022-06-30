@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import { Paper, Grid, Box, InputBase } from '@mui/material'
+import { Paper, Grid, Box, InputBase, ImageList, ImageListItem, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import Image from 'mui-image'
 import { useModal } from 'react-hooks-use-modal'
@@ -112,6 +112,8 @@ const SearchQuestions = () => {
   ]
 
   const [question, setQuestion] = useState()
+  // eslint-disable-next-line no-unused-vars
+  const [title, setTitle] = useState('')
   const [selectedQuestion, setSelectedQuestion] = useState()
   const [Modal, open, close, isOpen] = useModal('root', {
     preventScroll: true,
@@ -127,23 +129,37 @@ const SearchQuestions = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const {from} = location.state
+  const { from } = location.state
+
+  console.log(question)
 
   useEffect(() => {
     const getQuestions = () => {
       const result = async () => {
-        await axios.get('/questions', {
-          params: {
-            name: 'title',
-          },
-        })
+        await axios.get('/questions')
       }
       setQuestion(result.data)
     }
     getQuestions()
-  })
+  }, [])
 
-  console.log(question)
+  const searchQuestionByTitle = () => {
+    console.log('searching')
+    const getQuestions = () => {
+      const res = async () => {
+        await axios.get('/questions', { param: { title } })
+      }
+      setQuestion(res.data)
+    }
+    getQuestions()
+  }
+
+  const onChangeTitle = useCallback(
+    (event) => {
+      setTitle(event.target.value)
+    },
+    [setTitle]
+  )
 
   const clickQuestionTile = (qustionItem) => {
     setSelectedQuestion(qustionItem)
@@ -151,7 +167,8 @@ const SearchQuestions = () => {
   }
 
   const moveToInputName = (questionItem, _from) => {
-    navigate('/input-answerer-name', { state: { questionItem, from: _from } })
+    if (_from === 'answer') navigate('/input-answerer-name', { state: { questionItem, from: _from } })
+    if (_from === 'see') navigate('/answer-detail', { state: { questionItem } })
   }
 
   return (
@@ -168,8 +185,18 @@ const SearchQuestions = () => {
             borderRadius: '100vh',
           }}
         >
-          <SearchIcon />
-          <InputBase sx={{ ml: 1, flex: 1 }} placeholder="テーマやキーワードで検索" />
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="テーマやキーワードで検索"
+            value={title}
+            onChange={onChangeTitle}
+            onKeyPress={(event) => {
+              if (event.key === 'Enter') searchQuestionByTitle()
+            }}
+          />
         </Paper>
       </Box>
       <Grid container justifyContent="space-between" flexWrap="wrap" sx={{ height: '70vh', overflow: 'auto' }}>
@@ -190,7 +217,22 @@ const SearchQuestions = () => {
           >
             {/* <Link to="/input-answerer-name" state={{ questionItem: item }}> */}
             <Box p={2} sx={{ borderBottom: '2px solid #545454' }}>
-              <Image src={item.pictures[0].picture} />
+              <ImageList
+                cols={3}
+                gap={0}
+                sx={{
+                  borderRadius: '4px',
+                  width: '100%',
+                  backgroundColor: '#fff',
+                  '::-webkit-scrollbar': { display: 'none' },
+                }}
+              >
+                {item.pictures.map((p) => (
+                  <ImageListItem key={p.picture_id} sx={{ margin: '0 0 -1px -1px' }}>
+                    <Image src={p.picture} style={{ width: '100%', margin: 'auto' }} />
+                  </ImageListItem>
+                ))}
+              </ImageList>
             </Box>
             <Box p={2}>
               <Text text="テーマ :" style={{ color: '#545454', fontSize: 'small', lineHeight: '2em' }} align="left" />
@@ -229,7 +271,22 @@ const SearchQuestions = () => {
                 }}
               >
                 <Box p={2} sx={{ borderBottom: '2px solid #545454' }}>
-                  <Image src={selectedQuestion.pictures[0].picture} sx={{ height: '100%' }} />
+                  <ImageList
+                    cols={3}
+                    gap={0}
+                    sx={{
+                      borderRadius: '4px',
+                      width: '100%',
+                      backgroundColor: '#fff',
+                      '::-webkit-scrollbar': { display: 'none' },
+                    }}
+                  >
+                    {selectedQuestion.pictures.map((p) => (
+                      <ImageListItem key={p.picture_id} sx={{ margin: '0 0 -1px -1px' }}>
+                        <Image src={p.picture} style={{ width: '100%', margin: 'auto' }} />
+                      </ImageListItem>
+                    ))}
+                  </ImageList>
                 </Box>
                 <Box p={2}>
                   <Text

@@ -32,6 +32,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Application definition
 
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'rest_framework',
+    'mirisira_api.apps.MirisiraApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -107,7 +111,12 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://127.0.0.1:3000'
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3030',
+    'http://127.0.0.1:3333',
+    'http://localhost:3000',
+    'http://localhost:3030',
+    'http://localhost:3333',
 ]
 
 # Internationalization

@@ -42,7 +42,7 @@ const AnswerConfirmation = () => {
         </Grid>
       </Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-        <FlatButton text="前の問題へ" variant="white" />
+        <FlatButton text="前の問題へ" onClick={() => navigate(-1)} variant="white" />
         <FlatButton onClick={postAnswers} text="提出する" variant="black" />
       </Box>
     </Container>

@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'miniwakuwaku';
+  src: local('miniwakuwaku'), url('../../font/mini-wakuwaku.otf') format('opentype');
+  font-weight: normal;
+}
+
+.title {
+  font-family: 'miniwakuwaku' !important;
+}
+
 .App {
   text-align: center;
 }

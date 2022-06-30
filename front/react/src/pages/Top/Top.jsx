@@ -1,11 +1,13 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import { Image } from 'mui-image'
 
 import FlatButton from '../../components/FlatButton'
-import Text from '../../components/Text'
 import TopImage from '../../images/top.png'
+import '../../font/mini-wakuwaku.otf'
+
+import style from './Top.module.scss'
 
 const Top = () => {
   const navigate = useNavigate()
@@ -16,7 +18,9 @@ const Top = () => {
         <Image src={TopImage} alt="みりしらイメージ画像" sx={{ width: '100%', animation: 'none !important' }} />
       </Box>
       <Box sx={{ width: '50%' }}>
-        <Text text="みりしら" align="center" />
+        <Typography variant="h1" align="center" className={style.title} sx={{ fontSize: '4rem' }}>
+          みりしら
+        </Typography>
         <FlatButton
           text="作ってあそぶ！"
           variant="white"
@@ -28,9 +32,13 @@ const Top = () => {
         <FlatButton
           text="答えてあそぶ！"
           variant="white"
-          onClick={() => navigate('/search-problems', { state: { from: 'answer' } })}
+          onClick={() => navigate('/search-questions', { state: { from: 'answer' } })}
         />
-        <FlatButton text="見てあそぶ！" variant="white" onClick={() => navigate('/answer-search')} />
+        <FlatButton
+          text="見てあそぶ！"
+          variant="white"
+          onClick={() => navigate('/search-questions', { state: { from: 'see' } })}
+        />
       </Box>
     </Box>
   )

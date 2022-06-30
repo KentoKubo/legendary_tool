@@ -30,7 +30,7 @@ ReactDOM.render(
       <Router>
         <Routes>
           <Route path="/" element={<Top />} />
-          <Route path="/search-problems" element={<SearchQuestions />} />
+          <Route path="/search-questions" element={<SearchQuestions />} />
           <Route path="/input-name" element={<InputName />} />
           <Route path="/answer-preparation" element={<AnswerPreparation />} />
           <Route path="/answer-questions" element={<AnswerQuestions />} />

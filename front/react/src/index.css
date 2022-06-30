@@ -1,13 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Noto Sans JP', sans-serif;
+  height: 100vh;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#root {
+  height: 100vh;
+}
+
+.background-container {
+  position: relative;
+  height: 100%;
+}
+
+.yellow-box {
+  position: absolute;
+  width: 27%;
+  height: 100%;
+  left: 0;
+  background-image: url('./images/yellow.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.orange-box {
+  position: absolute;
+  width: 25%;
+  height: 20%;
+  right: 0;
+  background-image: url('./images/orange.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.blue-1 {
+  position: absolute;
+  width: 8%;
+  height: 12%;
+  right: 5%;
+  bottom: 0;
+  background-image: url('./images/blue.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.blue-2 {
+  position: absolute;
+  width: 8%;
+  height: 12%;
+  right: 15%;
+  bottom: 0;
+  background-image: url('./images/blue.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
+.container {
+  height: 100vh;
 }

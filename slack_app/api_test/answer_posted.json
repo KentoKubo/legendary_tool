@@ -1,0 +1,36 @@
+{
+    "question_id": 1,
+    "characters": [
+        {
+            "picture_id": 1,
+            "character_name": "1",
+            "character_explanation": "1"
+        },
+        {
+            "picture_id": 2,
+            "character_name": "2",
+            "character_explanation": "2"
+        },
+        {
+            "picture_id": 3,
+            "character_name": "3",
+            "character_explanation": "3"
+        },
+        {
+            "picture_id": 4,
+            "character_name": "4",
+            "character_explanation": "4"
+        },
+        {
+            "picture_id": 5,
+            "character_name": "5",
+            "character_explanation": "5"
+        },
+        {
+            "picture_id": 6,
+            "character_name": "6",
+            "character_explanation": "6"
+        }
+    ],
+    "answerer_name": "\u3051\u3093\u3068"
+}

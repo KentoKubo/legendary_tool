@@ -167,7 +167,7 @@ const SearchQuestions = () => {
   }
 
   const moveToInputName = (questionItem, _from) => {
-    if (_from === 'answer') navigate('/input-answerer-name', { state: { questionItem, from: _from } })
+    if (_from === 'answer') navigate('/input-name', { state: { questionItem, from: _from } })
     if (_from === 'see') navigate('/answer-detail', { state: { questionItem } })
   }
 

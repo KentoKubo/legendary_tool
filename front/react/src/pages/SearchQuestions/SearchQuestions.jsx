@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { Paper, Grid, Box, InputBase } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
@@ -125,6 +125,9 @@ const SearchQuestions = () => {
   }
 
   const navigate = useNavigate()
+  const location = useLocation()
+
+  const {from} = location.state
 
   useEffect(() => {
     const getQuestions = () => {
@@ -147,8 +150,8 @@ const SearchQuestions = () => {
     open()
   }
 
-  const moveToInputName = (questionItem) => {
-    navigate('/input-answerer-name', { state: { questionItem } })
+  const moveToInputName = (questionItem, _from) => {
+    navigate('/input-answerer-name', { state: { questionItem, from: _from } })
   }
 
   return (
@@ -248,7 +251,7 @@ const SearchQuestions = () => {
               </Box>
               <Box sx={{ width: '50%' }}>
                 <Text text="この問題であそびますか？" sx={{ color: '#545454' }} />
-                <FlatButton text="はい！" onClick={() => moveToInputName(selectedQuestion)} />
+                <FlatButton text="はい！" onClick={() => moveToInputName(selectedQuestion, from)} />
                 <FlatButton text="選びなおす！" onClick={close} variant="white" />
               </Box>
             </Box>

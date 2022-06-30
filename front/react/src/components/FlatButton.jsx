@@ -20,6 +20,7 @@ const FlatButton = (props) => {
             width: '240px',
             padding: '12px 40px',
             '&:hover': {
+              backgroundColor: '#fff',
               borderWidth: '2px',
             },
           }}

@@ -16,7 +16,7 @@ const AnswerConfirmation = () => {
 
   const postAnswers = async () => {
     // await axios.post('/answers', { characters: { answers }, answer_name: answererName })
-    navigate('/thanks')
+    navigate('/thanks', { state: { text: '回答を受け付けました！' } })
   }
 
   return (

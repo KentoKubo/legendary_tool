@@ -15,7 +15,8 @@ const AnswerConfirmation = () => {
   console.log(answererName)
 
   const postAnswers = async () => {
-    // await axios.post('/answers', { characters: { answers }, answer_name: answererName })
+    // const res = await axios.post('/answers', { characters: { answers }, answer_name: answererName })
+    // console.log(res)
     navigate('/thanks', { state: { text: '回答を受け付けました！' } })
   }
 
@@ -28,7 +29,7 @@ const AnswerConfirmation = () => {
             <Grid item sm={4} key={item.picture_id}>
               <Box sx={{ border: '1px solid #545454', backgroundColor: '#fff' }}>
                 <Box sx={{ textAlign: 'center', border: '1px solid' }}>
-                  <Image src={item.picture} height="100%" />
+                  <Image src={`data:image/png;base64,${item.picture}`} height="100%" />
                 </Box>
                 <Box sx={{ p: 1, border: '1px solid #545454', height: '1.5em' }}>
                   <Text text={answers[idx].character_name} align="center" />

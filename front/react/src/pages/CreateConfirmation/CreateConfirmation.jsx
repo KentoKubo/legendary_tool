@@ -2,6 +2,7 @@ import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Box, ImageList, ImageListItem, ImageListItemBar } from '@mui/material'
 import Image from 'mui-image'
+// eslint-disable-next-line no-unused-vars
 import axios from 'axios'
 
 import FlatButton from '../../components/FlatButton'
@@ -12,25 +13,46 @@ import style from './CreateConfirmation.module.scss'
 const CreateConfirmation = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  // eslint-disable-next-line no-unused-vars
   const { creatorName, title, images } = location.state
 
-  const clickCreateButton = async () => {
-    const data = new FormData()
+  const imageToBase64 = (image) => {
+    const reader = new FileReader()
+    return new Promise((resolve) => {
+      reader.onload = (event) => {
+        resolve(event.target.result)
+      }
+      reader.readAsDataURL(image)
+    })
+  }
 
-    data.append('creator_name', creatorName)
-    data.append('title', title)
-    data.append('pictures', images)
-
-    try {
-      axios.post('/questions', {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+  const returnBase64 = async () => {
+    const newList = await Promise.all(
+      images.map(async (image) => {
+        const res = await imageToBase64(image)
+        return res
       })
-      navigate('/thanks', { state: { text: '問題を作成しました！' } })
-    } catch (e) {
-      console.log(e)
-    }
+    )
+    return newList
+  }
+
+  const clickCreateButton = async () => {
+    const base64Images = await returnBase64()
+    console.info(base64Images)
+
+    await axios
+      .post(`${process.env.REACT_APP_API_HOST}/questions/`, {
+        creator_name: creatorName,
+        title,
+        pictures: base64Images,
+      })
+      .then((response) => {
+        console.log(response)
+        navigate('/thanks', { state: { text: '問題を作成しました！' } })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (

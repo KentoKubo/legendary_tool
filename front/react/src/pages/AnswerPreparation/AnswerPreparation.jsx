@@ -27,7 +27,7 @@ const AnswerPreparation = () => {
             <Grid item sm={4} key={item.picture_id}>
               <Box>
                 <Box sx={{ border: '1px solid #545454', height: '120px' }}>
-                  <Image src={item.picture} height="100%" />
+                  <Image src={`data:image/png;base64,${item.picture}`} height="100%" />
                 </Box>
                 <TextField
                   disabled

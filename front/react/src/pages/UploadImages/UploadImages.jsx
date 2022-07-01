@@ -17,7 +17,10 @@ const UploadImages = () => {
 
   const handleOnAddImage = (event) => {
     if (!event.target.files) return
-    setImages([...images, ...event.target.files])
+    console.log(event.target.files)
+    console.log(event.target.files[0])
+
+    setImages([...images, event.target.files[0]])
   }
 
   const handleOnRemoveImage = (index) => {

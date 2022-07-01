@@ -115,7 +115,7 @@ const AnswerQuestions = () => {
       </Box>
       <Box sx={{ display: 'flex' }}>
         <Box sx={{ width: '40%', border: '1px solid #545454' }}>
-          <Image src={currentPicture.picture} />
+          <Image src={`data:image/png;base64,${currentPicture.picture}`} />
         </Box>
         <Box sx={{ width: '60%', px: 4 }}>
           <Box>

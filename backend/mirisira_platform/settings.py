@@ -33,13 +33,13 @@ DEBUG = False
 
 if not DEBUG:
     SECRET_KEY = os.environ['SECRET_KEY']
-    import django_heroku
-    django_heroku.settings(locals())
 
     # only GCP
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
-    )
+    service_account_file = os.getenv("GOOGLE_CREDENTIALS", "")
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_info(json.loads(service_account_file))
+    # GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    # os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
+    # )
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     GS_BUCKET_NAME = os.environ["GS_BUCKET_NAME"]
@@ -80,7 +80,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'mirisira_api.apps.MirisiraApiConfig'
+    'mirisira_api.apps.MirisiraApiConfig',
+    'gunicorn'
+
+
 ]
 
 MIDDLEWARE = [
@@ -129,7 +132,7 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
 # Password validation
@@ -152,7 +155,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 if not DEBUG:
     CORS_ORIGIN_WHITELIST = [
-        'https://legendary-tool.vercel.app/',
+        'https://legendary-tool.vercel.app',
         'https://mirishira-slack-app.herokuapp.com',
     ]
 
@@ -184,3 +187,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())

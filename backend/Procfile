@@ -1,1 +1,1 @@
-web: gunicorn mirishira_platform.wsgi --log-file -
+web: gunicorn mirisira_platform.wsgi --log-file -

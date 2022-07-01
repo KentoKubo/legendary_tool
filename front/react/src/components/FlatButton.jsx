@@ -62,9 +62,6 @@ const FlatButton = (props) => {
                 backgroundColor: '#1A4263',
                 borderWidth: '2px',
               },
-              // '&:hover +.imgBox': {
-              //   opacity: '1',
-              // }
             }, style]}
             disabled={disabled}
           >

@@ -18,7 +18,7 @@ const AnswerPreparation = () => {
   }
 
   return (
-    <Container sx={{ paddingTop: '120px' }}>
+    <Container>
       <Text text={`テーマ : ${questionItem.title}`} align="center" style={{ mb: 2 }} />
       <Box sx={{ mx: '20%' }}>
         <Grid container sx={{ backgroundColor: '#fff' }}>

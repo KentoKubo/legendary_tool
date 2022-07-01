@@ -121,7 +121,7 @@ const AnswerQuestions = () => {
   }, [currentPictureNumber])
 
   return (
-    <Container container sx={{ width: '60%', paddingTop: '120px' }}>
+    <Container container sx={{ width: '60%' }}>
       <Box sx={{ textAlign: 'center', mb: 4 }}>
         <CircularProgress variant="determinate" value={progress} />
       </Box>

@@ -36,7 +36,7 @@ const InputTitle = () => {
   }
 
   return (
-    <Box sx={{ textAlign: 'center', paddingTop: '240px' }}>
+    <Box sx={{ textAlign: 'center', paddingTop: '120px' }}>
       <Box
         sx={{
           width: '70%',

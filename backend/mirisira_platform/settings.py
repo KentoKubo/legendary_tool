@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +35,21 @@ ALLOWED_HOSTS = []
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+if local_settings.ONLINE_STORAGE_TYPE == local_settings.DROPBOX:
+    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+    DROPBOX_OAUTH2_TOKEN = local_settings.DROPBOX_OAUTH2_TOKEN
+elif local_settings.ONLINE_STORAGE_TYPE == local_settings.GCP:
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    # 鍵ファイルのPATHを設定
+    local_settings.CREDENTIAL_FILE_PATH,
+    )
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = local_settings.GS_BUCKET_NAME
+    STATIC_URL = 'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
+
+
 
 # Application definition
 

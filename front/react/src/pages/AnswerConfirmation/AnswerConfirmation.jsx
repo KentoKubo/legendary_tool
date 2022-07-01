@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-// import axios from 'axios'
+import axios from 'axios'
 import { Container, Grid, Box } from '@mui/material'
 import { Image } from 'mui-image'
 
@@ -12,12 +12,22 @@ const AnswerConfirmation = () => {
   const navigate = useNavigate()
   const { questions, answers, answererName } = location.state
 
-  console.log(answererName)
+  console.log(answers)
 
   const postAnswers = async () => {
-    // const res = await axios.post('/answers', { characters: { answers }, answer_name: answererName })
-    // console.log(res)
-    navigate('/thanks', { state: { text: '回答を受け付けました！' } })
+    await axios
+      .post(`${process.env.REACT_APP_API_HOST}/answers/`, {
+        question_id: questions.question_id,
+        characters: answers,
+        answerer_name: answererName,
+      })
+      .then((result) => {
+        console.log(result)
+        navigate('/thanks', { state: { text: '回答を受け付けました！' } })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   return (

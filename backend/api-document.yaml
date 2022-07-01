@@ -269,6 +269,11 @@ components:
             type: string
             example: YWJjZGVmZw==
             description: 写真(base64)
+          picture_url:
+            type: string
+            example: https://xyz.co.jp/images/example.png
+            description: 写真のURL
+
       description: 写真IDと写真
 
     GetAnswerInfo:

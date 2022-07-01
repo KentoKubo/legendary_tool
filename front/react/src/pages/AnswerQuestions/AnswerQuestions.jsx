@@ -60,7 +60,7 @@ const AnswerQuestions = () => {
   const addToAnswerList = () => {
     const newAnswerList = [
       ...answerList,
-      { picture_id: currentPicture.pictureId, character_name: name, character_explanation: explanation },
+      { picture_id: currentPicture.picture_id, character_name: name, character_explanation: explanation },
     ]
     setAnswerList(newAnswerList)
     setName('')
@@ -80,7 +80,7 @@ const AnswerQuestions = () => {
       const newAnswerList = [
         ...answerList,
         {
-          picture_id: currentPicture.pictureId,
+          picture_id: currentPicture.picture_id,
           character_name: name,
           character_explanation: explanation,
         },
@@ -94,15 +94,27 @@ const AnswerQuestions = () => {
   const onChangeExplanation = useCallback((event) => setExplanation(event.target.value), [setExplanation])
 
   const finishTimer = () => {
-    clickNextButton()
-    setProgress(0)
+    const newAnswerList = [
+      ...answerList,
+      { picture_id: currentPicture.picture_id, character_name: 'じかんぎれ', character_explanation: 'じかんぎれ' },
+    ]
+    setAnswerList(newAnswerList)
+    setName('')
+    setExplanation('')
+    if (currentPictureNumber < questionItem.pictures.length - 1) {
+      setCurrentPicture(questionItem.pictures[currentPictureNumber + 1])
+      setCurrentPictureNumber(currentPictureNumber + 1)
+      setProgress(0)
+    } else {
+      navigate('/answer-confirmation', { state: { questions: questionItem, answers: newAnswerList, answererName } })
+    }
   }
 
   useEffect(() => {
     setProgress(0)
     const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? finishTimer() : Math.min(prevProgress + 3.34, 100)))
-    }, 1000)
+      setProgress((prevProgress) => (prevProgress >= 100 ? finishTimer() : Math.min(prevProgress + 0.334, 100)))
+    }, 100)
     return () => {
       clearInterval(timer)
     }

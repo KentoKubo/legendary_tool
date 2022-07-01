@@ -17,7 +17,6 @@ const AnswerPreparation = () => {
     navigate('/answer-questions', { state: { questionItem: _questionItem, answererName } })
   }
 
-  console.log(questionItem)
   return (
     <Container>
       <Text text={`テーマ : ${questionItem.title}`} align="center" style={{ mb: 2 }} />

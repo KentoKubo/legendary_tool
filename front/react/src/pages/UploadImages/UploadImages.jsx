@@ -39,7 +39,6 @@ const UploadImages = () => {
       sx={{
         width: '70%',
         mx: 'auto',
-        paddingTop: '120px',
         height: '70vh',
       }}
     >

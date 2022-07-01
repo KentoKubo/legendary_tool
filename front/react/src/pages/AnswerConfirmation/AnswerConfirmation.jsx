@@ -21,7 +21,7 @@ const AnswerConfirmation = () => {
   }
 
   return (
-    <Container sx={{ paddingTop: '120px' }}>
+    <Container>
       <Text text="回答を確認して提出しよう！" align="center" style={{ mb: 2 }} />
       <Box sx={{ mx: '20%' }}>
         <Grid container>

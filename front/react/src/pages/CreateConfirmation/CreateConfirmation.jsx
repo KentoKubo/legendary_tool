@@ -56,7 +56,7 @@ const CreateConfirmation = () => {
   }
 
   return (
-    <Box sx={{ width: '60%', mx: 'auto', pt: '120px' }}>
+    <Box sx={{ width: '60%', mx: 'auto' }}>
       <Text text={`テーマ : ${title}`} align="center" style={{ fontSize: '30px', color: '#545454', mb: 4 }} />
       <Box>
         <ImageList

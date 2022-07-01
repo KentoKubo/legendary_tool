@@ -4,6 +4,7 @@ import { Box, TextField } from '@mui/material'
 
 import FlatButton from '../../components/FlatButton'
 import Text from '../../components/Text'
+import Header from '../../components/Header/Header'
 
 const InputName = () => {
   const [name, setName] = useState('')
@@ -38,32 +39,34 @@ const InputName = () => {
   }
 
   return (
-    <Box sx={{ textAlign: 'center', paddingTop: '240px' }}>
-      <Text text="あなたのお名前は？(15文字以内)" style={{ mb: 3 }} align="center" />
-      <TextField
-        value={name}
-        onChange={handleChange}
-        variant="filled"
-        autoComplete="off"
-        sx={{
-          width: '50%',
-          border: '2px solid #545454',
-          borderRadius: '4px',
-          '& .MuiFilledInput-root': {
-            backgroundColor: '#fff',
-            '&:before': { borderBottom: 'none' },
-            '&:after': { borderBottom: 'none' },
-            '&:hover': { backgroundColor: '#fff' },
-          },
-          '& .MuiFilledInput-input': {
-            padding: '16px 12px',
-            '&:focus': { backgroundColor: '#fff' },
-            '&:active': { backgroundColor: '#fff' },
-          },
-        }}
-      />
-      <FlatButton text="つぎへ" onClick={moveToAnswerPreparation} />
-    </Box>
+    <Header from={from}>
+      <Box sx={{ textAlign: 'center', paddingTop: '120px' }}>
+        <Text text="あなたのお名前は？(15文字以内)" style={{ mb: 3 }} align="center" />
+        <TextField
+          value={name}
+          onChange={handleChange}
+          variant="filled"
+          autoComplete="off"
+          sx={{
+            width: '50%',
+            border: '2px solid #545454',
+            borderRadius: '4px',
+            '& .MuiFilledInput-root': {
+              backgroundColor: '#fff',
+              '&:before': { borderBottom: 'none' },
+              '&:after': { borderBottom: 'none' },
+              '&:hover': { backgroundColor: '#fff' },
+            },
+            '& .MuiFilledInput-input': {
+              padding: '16px 12px',
+              '&:focus': { backgroundColor: '#fff' },
+              '&:active': { backgroundColor: '#fff' },
+            },
+          }}
+        />
+        <FlatButton text="つぎへ" onClick={moveToAnswerPreparation} />
+      </Box>
+    </Header>
   )
 }
 

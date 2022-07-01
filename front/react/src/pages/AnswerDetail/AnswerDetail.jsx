@@ -16,7 +16,6 @@ import right from '../../images/right.png'
 /* eslint no-param-reassign:0 */
 
 const AnswerDetail = () => {
-
   const [selectedAnswerNum, setSelectedAnswerNum] = useState(0)
   const [answerList, setAnswerList] = useState([])
   const [answer, setAnswer] = useState([])
@@ -28,16 +27,19 @@ const AnswerDetail = () => {
 
   useEffect(() => {
     const getAnswerList = async () => {
-      const result = await axios.get(`${process.env.REACT_APP_API_HOST}/answers/`, { params: { question_id: questionItem.question_id } })
+      const result = await axios.get(`${process.env.REACT_APP_API_HOST}/answers/`, {
+        params: { question_id: questionItem.question_id },
+      })
       setAnswerList(result.data.answers)
     }
     getAnswerList()
   }, [])
-  console.log(answerList)
-  
+
   useEffect(() => {
     const fetchAnswer = async () => {
-      const result = await axios.get(`${process.env.REACT_APP_API_HOST}/answers/${answerList[selectedAnswerNum].answer_id}/`)
+      const result = await axios.get(
+        `${process.env.REACT_APP_API_HOST}/answers/${answerList[selectedAnswerNum].answer_id}/`
+      )
       setAnswer(result.data.characters)
     }
     fetchAnswer()
@@ -66,16 +68,17 @@ const AnswerDetail = () => {
     <div className={style.container}>
       <i className="icon-download" style={{ fontSize: '80px' }} />
       <div style={{ display: 'flex' }}>
-        {(selectedAnswerNum !== 0)
-          ? <button className={style.button} type='button' onClick={clickPrevButton}>
-              <img src={left} alt="previous"/>
-              <Text text='前の回答へ' style={{color: '#545454', fontSize: 'small'}}/>
-            </button>
-          : <button type='button'>
-              <img src={left} alt="previous" style={{opacity: "50%"}}/>
-              <Text text='前の回答へ' style={{color: '#545454', fontSize: 'small', opacity: "50%"}}/>
-            </button>
-        }
+        {selectedAnswerNum !== 0 ? (
+          <button className={style.button} type="button" onClick={clickPrevButton}>
+            <img src={left} alt="previous" />
+            <Text text="前の回答へ" style={{ color: '#545454', fontSize: 'small' }} />
+          </button>
+        ) : (
+          <button type="button">
+            <img src={left} alt="previous" style={{ opacity: '50%' }} />
+            <Text text="前の回答へ" style={{ color: '#545454', fontSize: 'small', opacity: '50%' }} />
+          </button>
+        )}
         <div>
           <ImageList
             cols={3}
@@ -93,7 +96,11 @@ const AnswerDetail = () => {
             {answer.length > 0 &&
               questionItem.pictures.map((picture, idx) => (
                 <ImageListItem className={style.imgListItem} key={picture.picture_id} sx={{ margin: '0 0 -1px -1px' }}>
-                  <Image className={style.imgList} src={`data:image/png;base64,${picture.picture}`} style={{ width: '50%', margin: 'auto' }} />
+                  <Image
+                    className={style.imgList}
+                    src={`data:image/png;base64,${picture.picture}`}
+                    style={{ width: '50%', margin: 'auto' }}
+                  />
                   <ImageListItemBar
                     position="below"
                     title={answer[idx].character_name}
@@ -111,18 +118,23 @@ const AnswerDetail = () => {
                 </ImageListItem>
               ))}
           </ImageList>
-          <Text text={`回答者 : ${answerList[selectedAnswerNum].answerer_name} 回答日時 : ${answerList[selectedAnswerNum].create_at}`} />
+          {answerList.length > 0 && (
+            <Text
+              text={`回答者 : ${answerList[selectedAnswerNum].answerer_name} 回答日時 : ${answerList[selectedAnswerNum].create_at}`}
+            />
+          )}
         </div>
-        {(selectedAnswerNum !== answerList.length - 1)
-          ? <button type="button" onClick={clickNextButton}>
-              <img src={right} alt="next" />
-              <Text text="次の回答へ" style={{ color: '#545454', fontSize: 'small' }} />
-            </button>
-          : <button type="button">
-              <img src={right} alt="next" style={{opacity: "50%"}}/>
-              <Text text="次の回答へ" style={{ color: '#545454', fontSize: 'small', opacity: "50%"}} />
-            </button>
-        }
+        {selectedAnswerNum !== answerList.length - 1 ? (
+          <button type="button" onClick={clickNextButton}>
+            <img src={right} alt="next" />
+            <Text text="次の回答へ" style={{ color: '#545454', fontSize: 'small' }} />
+          </button>
+        ) : (
+          <button type="button">
+            <img src={right} alt="next" style={{ opacity: '50%' }} />
+            <Text text="次の回答へ" style={{ color: '#545454', fontSize: 'small', opacity: '50%' }} />
+          </button>
+        )}
       </div>
       <FlatButton text="一覧に戻る" onClick={clickBackButton} variant="white" />
     </div>

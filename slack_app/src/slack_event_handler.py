@@ -1,18 +1,9 @@
-import logging
-import time
 import json
 
 from slack_bolt import App, Ack
 
 from slack_views import MirishiraSlackView
 from mirishira_api_caller import MirishiraApiCaller
-
-logging.basicConfig(level=logging.DEBUG,
-    filename="test.log",
-    format="%(asctime)s %(levelname)-7s %(message)s"
-    )
-
-logger = logging.getLogger(__name__)
 
 class MirishiraSlackBot:
 
@@ -21,7 +12,7 @@ class MirishiraSlackBot:
         self.apiBaseEndpoint = apiBaseEndpoint
         self.frontBaseUrl = frontBaseUrl
 
-        self.postChannel = "C03M7F6GGP6"
+        self.postChannel = "#random"
         self.postTime = "10:00"
 
         self.slackView = MirishiraSlackView()
@@ -38,7 +29,7 @@ class MirishiraSlackBot:
 
         # this command event must be replaced with scheduled event
         @self.app.command("/test")
-        def postTestMessage(ack: Ack, client, logger: logging.Logger):
+        def postTestMessage(ack: Ack, client):
             ack()
 
             oneQuestion = self.mirishiraApiCaller.pickupNewestQuestion()
@@ -49,7 +40,7 @@ class MirishiraSlackBot:
             )
 
         @self.app.action("open_answer_modal")
-        def openAnswerModal(ack: Ack, body: dict, client, logger: logging.Logger):
+        def openAnswerModal(ack: Ack, body: dict, client):
             ack()
 
             title = body["actions"][0]["value"]
@@ -74,7 +65,7 @@ class MirishiraSlackBot:
 
 
         @self.app.view("answerer_name")
-        def startAnswers(ack: Ack, view: dict, logger: logging.Logger):
+        def startAnswers(ack: Ack, view: dict):
             inputs = view["state"]["values"]
             answererName = inputs.get("answerer_name_block", {}).get("answerer_name", {}).get("value")
 
@@ -93,7 +84,7 @@ class MirishiraSlackBot:
 
 
         @self.app.view("answer_start")
-        def displayFirstQuestion(ack: Ack, view: dict, client, logger: logging.Logger):
+        def displayFirstQuestion(ack: Ack, view: dict):
             answerData = json.loads(view["private_metadata"])
 
             targetQuestion = self.mirishiraApiCaller.getQuestionFromTitle(answerData["questionTitle"])
@@ -107,7 +98,6 @@ class MirishiraSlackBot:
 
             answerData["characters"].append(oneCharacter)
             answerData["characterCtr"] += 1
-            # timeCheckCtr = answerData["characterCtr"]
 
             ack(
                 response_action="update",
@@ -115,35 +105,14 @@ class MirishiraSlackBot:
                     json.dumps(answerData),
                     answerData["characterCtr"],
                     answerData["characterTotalNum"],
-                    # targetPicture["picture"]
                     targetPicture["picture_url"]
                 )
-                # view=self.slackView.getAnswerFormView(self.answerCtr, len(self.testImageList), self.testImageList[self.answerCtr-1], 30)
             )
-
-            # time.sleep(30)
-
-            # for sec in range(30, -1, -1):
-                # time.sleep(1)
-                # logger.info(str(sec) + ", " + str(timeCheckCtr) + ", " + str(answerData["characterCtr"]) + ", " + str(json.loads(view["private_metadata"])["characterCtr"]))
-
-            # for sec in range(29, -1, -1):
-                # time.sleep(0.7)
-                # client.views_update(
-                    # external_id="answering_ex_" + str(self.answerCtr),
-                    # view=self.slackView.getAnswerFormView(self.answerCtr, len(self.testImageList), self.testImageList[self.answerCtr-1], sec)
-                # )
-
-            # client.views_update(
-                # external_id="answering_ex_" + str(self.answerCtr),
-                # view=self.slackView.getAnswerTimeUpView()
-            # )
 
 
 
         @self.app.view("answering")
-        def getAnswerAndDisplyNextQuestion(ack: Ack, view: dict, client, logger: logging.Logger):
-            # logger.info(view)
+        def getAnswerAndDisplyNextQuestion(ack: Ack, view: dict):
             answerData = json.loads(view["private_metadata"])
             inputs = view["state"]["values"]
 
@@ -179,29 +148,13 @@ class MirishiraSlackBot:
                     json.dumps(answerData),
                     answerData["characterCtr"],
                     answerData["characterTotalNum"],
-                    # targetPicture["picture"]
                     targetPicture["picture_url"]
                 )
-                # view=self.slackView.getAnswerFormView(self.answerCtr, len(self.testImageList), self.testImageList[self.answerCtr-1], 30)
             )
-
-            # time.sleep(30)
-
-            # for sec in range(30, 0, -1):
-                # time.sleep(0.7)
-                # client.views_update(
-                    # external_id="answering_ex_" + str(self.answerCtr),
-                    # view=self.slackView.getAnswerFormView(self.answerCtr, len(self.testImageList), self.testImageList[self.answerCtr-1], sec)
-                # )
-
-            # client.views_update(
-                # external_id="answering_ex_" + str(self.answerCtr),
-                # view=self.slackView.getAnswerTimeUpView()
-            # )
 
 
         @self.app.view("answer_finish")
-        def displayThanks(ack: Ack, view: dict, client, logger: logging.Logger):
+        def displayThanks(ack: Ack, view: dict, client):
             ack(
                 response_action="update",
                 view=self.slackView.getAnswerThanksView()
@@ -211,11 +164,7 @@ class MirishiraSlackBot:
             answerId = self.mirishiraApiCaller.postAnswer(answerData["questionId"], answerData["characters"], answerData["answererName"])
 
             inputs = view["state"]["values"]
-            logger.info(inputs)
-            logger.info(inputs.get("share_in_slack", {}))
-            logger.info(inputs.get("share_in_slack", {}).get("check_to_share", {}))
             isShare = inputs.get("share_in_slack", {}).get("check_to_share", {}).get("selected_options")[0].get("value")
-            logger.info(isShare)
 
             targetQuestion = self.mirishiraApiCaller.getQuestionFromTitle(answerData["questionTitle"])
 
@@ -232,7 +181,7 @@ class MirishiraSlackBot:
 
 
         @self.app.action("open_answer_look_modal")
-        def openAnswerLookModal(ack: Ack, body: dict, client, logger: logging.Logger):
+        def openAnswerLookModal(ack: Ack, body: dict, client):
             ack()
 
             titleAndId = body["actions"][0]["value"].rsplit("_", 2)
@@ -260,7 +209,7 @@ class MirishiraSlackBot:
 
 
         @self.app.view("answer_look_start")
-        def displayFirstQuestion(ack: Ack, view: dict, logger: logging.Logger):
+        def displayFirstQuestion(ack: Ack, view: dict):
             answeredData = json.loads(view["private_metadata"])
 
             targetQuestion = self.mirishiraApiCaller.getQuestionFromTitle(answeredData["questionTitle"])
@@ -281,7 +230,6 @@ class MirishiraSlackBot:
                     json.dumps(answeredData),
                     answeredData["characterCtr"],
                     answeredData["characterTotalNum"],
-                    # targetPicture["picture"],
                     targetPicture["picture_url"],
                     targetAnswer,
                     answeredData["answererName"]
@@ -290,7 +238,7 @@ class MirishiraSlackBot:
 
 
         @self.app.view("answer_looking")
-        def getAnswerAndDisplyNextQuestion(ack: Ack, view: dict, logger: logging.Logger):
+        def getAnswerAndDisplyNextQuestion(ack: Ack, view: dict):
             answeredData = json.loads(view["private_metadata"])
 
             if answeredData["characterCtr"] == answeredData["characterTotalNum"]:
@@ -318,7 +266,6 @@ class MirishiraSlackBot:
                     json.dumps(answeredData),
                     answeredData["characterCtr"],
                     answeredData["characterTotalNum"],
-                    # targetPicture["picture"],
                     targetPicture["picture_url"],
                     targetAnswer,
                     answeredData["answererName"]
@@ -327,7 +274,7 @@ class MirishiraSlackBot:
 
 
         @self.app.event("app_home_opened")
-        def updateHomeTab(client, event, logger):
+        def updateHomeTab(client, event):
             try:
                 client.views_publish(
                     user_id=event["user"],
@@ -337,18 +284,16 @@ class MirishiraSlackBot:
                     }
                 )
             except Exception as e:
-                logger.error(f"Error publishing home tab: {e}")
+                pass
 
 
         @self.app.action("channel_selected")
-        def setPostChannel(ack, body, logger):
+        def setPostChannel(ack: Ack, body: dict):
             ack()
             self.postChannel = body["actions"][0]["selected_channel"]
-            logger.info(body)
 
 
         @self.app.action("time_selected")
-        def setPostTime(ack, body, logger):
+        def setPostTime(ack: Ack, body: dict):
             ack()
             self.postTime = body["actions"][0]["selected_time"]
-            logger.info(body)

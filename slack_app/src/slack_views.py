@@ -48,7 +48,7 @@ class MirishiraSlackView:
 			    "type": "section",
 			    "text": {
 				    "type": "mrkdwn",
-				    "text": "ミリしらを投稿する時間"
+				    "text": "ミリしらを投稿する時間(未対応)"
 			    }
 		    },
 		    {
@@ -86,7 +86,6 @@ class MirishiraSlackView:
         for i in range(len(picturesList)):
             imageBlock = {
 				"type": "image",
-				# "image_url": picturesList[i]["picture"],
 				"image_url": picturesList[i]["picture_url"],
 				"alt_text": "ミリしらキャラ-" + str(i)
             }
@@ -195,7 +194,6 @@ class MirishiraSlackView:
                 }
             ],
 			"private_metadata": answerData
-			#"private_metadata":json.dumps(question)
         }
         return answerNameFormView
 
@@ -232,7 +230,6 @@ class MirishiraSlackView:
         return answerStartView
 
     def getAnswerFormView(self, answerData: str, imageCtr: int, imageNum: int, imageUrl: str):
-    # def getAnswerFormView(self, imageCtr: int, imageNum: int, imageUrl: str, seconds: int):
         answerFormView={
 	        "type": "modal",
             "callback_id": "answering",
@@ -291,14 +288,6 @@ class MirishiraSlackView:
 				        "emoji": True
 			        }
 				}
-		        # },
-                # {
-					# "type": "section",
-					# "text": {
-						# "type": "mrkdwn",
-						# "text": "残り時間 : " + str(seconds) + " 秒"
-					# }
-				# }
 	        ],
 			"private_metadata":answerData
         }

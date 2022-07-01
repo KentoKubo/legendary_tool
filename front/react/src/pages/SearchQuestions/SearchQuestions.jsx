@@ -39,12 +39,10 @@ const SearchQuestions = () => {
   }, [])
 
   const searchQuestionByTitle = () => {
-    console.log('searching')
-    const getQuestions = () => {
-      const res = async () => {
-        await axios.get('/questions', { param: { title } })
-      }
-      setQuestions(res.data)
+    console.log(`search with : ${title}`)
+    const getQuestions = async () => {
+      const res = await axios.get(`${process.env.REACT_APP_API_HOST}/questions/`, { params: { title } })
+      setQuestions(res.data.questions)
     }
     getQuestions()
   }
@@ -80,7 +78,7 @@ const SearchQuestions = () => {
             borderRadius: '100vh',
           }}
         >
-          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+          <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" onClick={searchQuestionByTitle}>
             <SearchIcon />
           </IconButton>
           <InputBase

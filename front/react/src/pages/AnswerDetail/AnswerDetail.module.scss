@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Arrow';
+  src: '../../fonts/fontello.ttf';
+}
+
+.container {
+  margin: auto;
+  width: 80%;
+  text-align: center;
+  position: relative;
+  top: 100px;
+}
+
+.questionForm {
+  margin: 36px 0;
+
+  & .answerInput {
+    width: 66%;
+  }
+}
+// .imgListItem {
+//   border-bottom: 1px solid #545454;
+// }
+.imgListItem + .imgListItem {
+  border-left: 1px solid #545454;
+  // border-right: 1px solid #545454;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  margin: auto;
+  cursor: pointer;
+  & :before {
+    content: '';
+  }
+}
+
+.button:hover{
+  cursor: pointer;
+  cursor: hand;
+}

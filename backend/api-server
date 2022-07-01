@@ -1,0 +1,13 @@
+FROM python:3.9-alpine                       
+RUN apk add --no-cache gcc libc-dev jpeg-dev zlib-dev
+
+
+COPY ./backend/requirements.txt /requirements.txt    
+RUN pip install -r /requirements.txt     
+
+RUN mkdir /backend
+WORKDIR /backend
+COPY ./backend /backend
+
+RUN adduser -D user
+USER user

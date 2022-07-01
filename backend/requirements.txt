@@ -6,3 +6,6 @@ drf-extra-fields == 3.3.0
 dropbox==11.32.0
 google-cloud-storage
 django-storages==1.12.3
+dj-database-url
+django-heroku
+gunicorn

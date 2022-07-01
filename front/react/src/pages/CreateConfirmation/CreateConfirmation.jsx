@@ -73,7 +73,16 @@ const CreateConfirmation = () => {
         >
           {images.map((item) => (
             <ImageListItem key="list" className={style.image_list}>
-              <Image src={URL.createObjectURL(item)} style={{ width: 'auto', height: '210px', margin: 'auto' }} />
+              <Image
+                src={URL.createObjectURL(item)}
+                style={{
+                  width: 'auto',
+                  height: '210px',
+                  margin: 'auto',
+                  animation: 'none !important',
+                  transitionDuration: 'none',
+                }}
+              />
               <ImageListItemBar
                 position="below"
                 sx={{ borderBottom: '1px solid #545454', borderTop: '1px solid #545454', height: '2em' }}

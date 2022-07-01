@@ -68,7 +68,13 @@ const AnswerConfirmation = () => {
                 <ImageListItem key="list" className={style.image_list}>
                   <Image
                     src={`data:image/png;base64,${item.picture}`}
-                    style={{ width: 'auto', height: '210px', margin: 'auto' }}
+                    style={{
+                      width: 'auto',
+                      height: '210px',
+                      margin: 'auto',
+                      animation: 'none !important',
+                      transitionDuration: 'none',
+                    }}
                   />
                   <ImageListItemBar
                     position="below"

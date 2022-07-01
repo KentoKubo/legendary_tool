@@ -65,7 +65,10 @@ const InputTitle = () => {
           >
             {images.map((item) => (
               <ImageListItem key="a" sx={{ margin: '0 0 -1px -1px' }}>
-                <Image src={URL.createObjectURL(item)} style={{ width: '100%', margin: 'auto' }} />
+                <Image
+                  src={URL.createObjectURL(item)}
+                  style={{ width: '100%', margin: 'auto', animation: 'none !important', transitionDuration: 'none' }}
+                />
               </ImageListItem>
             ))}
           </ImageList>

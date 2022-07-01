@@ -1,8 +1,0 @@
-FROM python:3.9-alpine
-
-COPY ./slack_app/requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
-
-RUN mkdir /slack_app
-WORKDIR /slack_app
-COPY ./slack_app /slack_app

@@ -12,7 +12,7 @@ const Thanks = () => {
   const { text } = location.state
 
   return (
-    <Box sx={{ paddingTop: '360px' }}>
+    <Box sx={{ paddingTop: '240px' }}>
       <Text text={text} align="center" />
       <FlatButton text="ホームにもどる" variant="black" onClick={() => navigate('/')} />
     </Box>

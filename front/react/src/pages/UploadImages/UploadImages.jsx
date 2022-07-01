@@ -17,21 +17,19 @@ const UploadImages = () => {
 
   const handleOnAddImage = (event) => {
     if (!event.target.files) return
-    console.log(event.target.files)
-    console.log(event.target.files[0])
-
     setImages([...images, event.target.files[0]])
   }
 
   const handleOnRemoveImage = (index) => {
-    // 選択した画像は削除可能
     const newImages = [...images]
     newImages.splice(index, 1)
     setImages(newImages)
   }
 
   const clickNextPage = () => {
-    navigate('/input-title', { state: { images, creatorName } })
+    if (images.length > 0) navigate('/input-title', { state: { images, creatorName } })
+    else if (images.length === 0) alert('最低一枚は画像を選んでください')
+    else alert('10枚まで画像を選んでください')
   }
 
   return (
@@ -39,7 +37,6 @@ const UploadImages = () => {
       sx={{
         width: '70%',
         mx: 'auto',
-        paddingTop: '120px',
         height: '70vh',
       }}
     >

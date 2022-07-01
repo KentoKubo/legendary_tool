@@ -1,4 +1,5 @@
 # for question serializer
+from mirisira_platform.local_settings import *
 
 from dataclasses import field
 from django.core.files.storage import get_storage_class
@@ -18,13 +19,23 @@ class PictureSerializer(serializers.ModelSerializer):
         model = Picture
         fields = ["picture_id","picture","picture_url"]
 
+    # def get_picture(self,instance):
+    #     # instance of the current storage class
+    #     media_storage = get_storage_class()()
+    #     url = media_storage.url(instance.__dict__["file_path"])
+    #     picture_data = base64.b64encode(requests.get(url).content)
+    #     return picture_data
+
     def get_picture(self,instance):
-        # instance of the current storage class
+            # instance of the current storage class
         media_storage = get_storage_class()()
         url = media_storage.url(instance.__dict__["file_path"])
-        picture_data = base64.b64encode(requests.get(url).content)
+        if ONLINE_STORAGE_TYPE == LOCAL:
+            picture_data = base64.b64encode(requests.get("http://127.0.0.1:8000"+url).content)
+        else:
+            picture_data = base64.b64encode(requests.get(url).content)
         return picture_data
-    
+
     def create(self, validated_data):
         picture = validated_data.pop('picture')
         if type(picture) is str:

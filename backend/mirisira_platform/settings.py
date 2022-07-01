@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from google.oauth2 import service_account
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,29 +27,46 @@ try:
 except ImportError:
     pass
 
-SECRET_KEY = local_settings.secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku
+    django_heroku.settings(locals())
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-if local_settings.ONLINE_STORAGE_TYPE == local_settings.DROPBOX:
-    DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-    DROPBOX_OAUTH2_TOKEN = local_settings.DROPBOX_OAUTH2_TOKEN
-elif local_settings.ONLINE_STORAGE_TYPE == local_settings.GCP:
+    # only GCP
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    # 鍵ファイルのPATHを設定
-    local_settings.CREDENTIAL_FILE_PATH,
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
     )
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_BUCKET_NAME = local_settings.GS_BUCKET_NAME
+    GS_BUCKET_NAME = os.environ["GS_BUCKET_NAME"]
     STATIC_URL = 'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
 
+
+else:
+    SECRET_KEY = local_settings.secret_key
+    if local_settings.ONLINE_STORAGE_TYPE == local_settings.DROPBOX:
+        DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+        DROPBOX_OAUTH2_TOKEN = local_settings.DROPBOX_OAUTH2_TOKEN
+    elif local_settings.ONLINE_STORAGE_TYPE == local_settings.GCP:
+        GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        # 鍵ファイルのPATHを設定
+        local_settings.CREDENTIAL_FILE_PATH,
+        )
+        DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+        STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+        GS_BUCKET_NAME = local_settings.GS_BUCKET_NAME
+        STATIC_URL = 'https://storage.googleapis.com/{GS_BUCKET_NAME}/'
+
+
+
+ALLOWED_HOSTS = ['*']
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 # Application definition
@@ -102,11 +120,17 @@ WSGI_APPLICATION = 'mirisira_platform.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'name',
+        'USER': 'user',
+        'PASSWORD': '',
+        'HOST': 'host',
+        'PORT': '',
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -126,14 +150,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:3030',
-    'http://127.0.0.1:3333',
-    'http://localhost:3000',
-    'http://localhost:3030',
-    'http://localhost:3333',
-]
+if not DEBUG:
+    CORS_ORIGIN_WHITELIST = [
+        'https://legendary-tool.vercel.app/',
+        'https://mirishira-slack-app.herokuapp.com',
+    ]
+
+else:
+    CORS_ORIGIN_WHITELIST = [
+        'http://127.0.0.1:3000',
+        'http://127.0.0.1:3030',
+        'http://127.0.0.1:3333',
+        'http://localhost:3000',
+        'http://localhost:3030',
+        'http://localhost:3333',
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

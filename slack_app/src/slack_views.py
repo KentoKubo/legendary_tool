@@ -86,7 +86,8 @@ class MirishiraSlackView:
         for i in range(len(picturesList)):
             imageBlock = {
 				"type": "image",
-				"image_url": picturesList[i]["picture"],
+				# "image_url": picturesList[i]["picture"],
+				"image_url": picturesList[i]["picture_url"],
 				"alt_text": "ミリしらキャラ-" + str(i)
             }
             imageBlockList.append(imageBlock)

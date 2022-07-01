@@ -115,7 +115,8 @@ class MirishiraSlackBot:
                     json.dumps(answerData),
                     answerData["characterCtr"],
                     answerData["characterTotalNum"],
-                    targetPicture["picture"]
+                    # targetPicture["picture"]
+                    targetPicture["picture_url"]
                 )
                 # view=self.slackView.getAnswerFormView(self.answerCtr, len(self.testImageList), self.testImageList[self.answerCtr-1], 30)
             )
@@ -178,7 +179,8 @@ class MirishiraSlackBot:
                     json.dumps(answerData),
                     answerData["characterCtr"],
                     answerData["characterTotalNum"],
-                    targetPicture["picture"]
+                    # targetPicture["picture"]
+                    targetPicture["picture_url"]
                 )
                 # view=self.slackView.getAnswerFormView(self.answerCtr, len(self.testImageList), self.testImageList[self.answerCtr-1], 30)
             )
@@ -279,7 +281,8 @@ class MirishiraSlackBot:
                     json.dumps(answeredData),
                     answeredData["characterCtr"],
                     answeredData["characterTotalNum"],
-                    targetPicture["picture"],
+                    # targetPicture["picture"],
+                    targetPicture["picture_url"],
                     targetAnswer,
                     answeredData["answererName"]
                 )
@@ -315,7 +318,8 @@ class MirishiraSlackBot:
                     json.dumps(answeredData),
                     answeredData["characterCtr"],
                     answeredData["characterTotalNum"],
-                    targetPicture["picture"],
+                    # targetPicture["picture"],
+                    targetPicture["picture_url"],
                     targetAnswer,
                     answeredData["answererName"]
                 )

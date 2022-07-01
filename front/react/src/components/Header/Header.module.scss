@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'miniwakuwaku';
+  src: local('miniwakuwaku'), url('../../font/mini-wakuwaku.otf') format('opentype');
+  font-weight: normal;
+}
+
+.logo {
+  font-family: 'miniwakuwaku' !important;
+}

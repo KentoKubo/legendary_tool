@@ -15,7 +15,11 @@ const Top = () => {
   return (
     <Box sx={{ display: 'flex', width: '50%', margin: '0 auto', paddingTop: '240px' }}>
       <Box sx={{ width: '50%' }}>
-        <Image src={TopImage} alt="みりしらイメージ画像" sx={{ width: '100%', animation: 'none !important' }} />
+        <Image
+          src={TopImage}
+          alt="みりしらイメージ画像"
+          style={{ width: '100%', height: 'auto', animation: 'none !important', transitionDuration: 'none' }}
+        />
       </Box>
       <Box sx={{ width: '50%' }}>
         <Typography variant="h1" align="center" className={style.title} sx={{ fontSize: '4rem' }}>

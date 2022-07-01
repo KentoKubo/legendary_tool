@@ -9,28 +9,25 @@ const FlatButton = (props) => {
   return (
     <Box sx={{ m: 4, textAlign: 'center' }}>
       {variant === 'white' ? (
-        <div>
-          <Button
-            onClick={onClick}
-            variant="outlined"
-            sx={[{
-              border: '2px solid #1A4263',
-              borderRadius: '100vh',
-              backgroundColor: '#FFFFFF',
-              color: '#1A4263',
-              width: '240px',
-              padding: '12px 40px',
-              '&:hover': {
-                backgroundColor: '#fff',
-                borderWidth: '2px',
-              },
-            }, style]}
-            disabled={disabled}
-          >
-            <Text text={text} align="center" />
-          </Button>
-          <Image src={img} alt='飾り' />
-        </div>
+        <Button
+          onClick={onClick}
+          variant="outlined"
+          sx={[{
+            border: '2px solid #1A4263',
+            borderRadius: '100vh',
+            backgroundColor: '#FFFFFF',
+            color: '#1A4263',
+            width: '240px',
+            padding: '12px 40px',
+            '&:hover': {
+              backgroundColor: '#fff',
+              borderWidth: '2px',
+            },
+          }, style]}
+          disabled={disabled}
+        >
+          <Text text={text} align="center" />
+        </Button>
       ) : (
         <div>
           <Button

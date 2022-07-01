@@ -9,8 +9,6 @@ import '../../font/mini-wakuwaku.otf'
 
 import style from './Top.module.scss'
 
-import green from '../../images/green.png'
-
 const Top = () => {
   const navigate = useNavigate()
 
@@ -34,7 +32,6 @@ const Top = () => {
               border: '2px solid #1A4263',
             }
           }}
-          img={green}
         />
         <FlatButton
           text="答えてあそぶ！"

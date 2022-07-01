@@ -9,27 +9,44 @@ const FlatButton = (props) => {
   return (
     <Box sx={{ m: 4, textAlign: 'center' }}>
       {variant === 'white' ? (
-        <Button
-          onClick={onClick}
-          variant="outlined"
-          sx={[{
-            border: '2px solid #1A4263',
-            borderRadius: '100vh',
-            backgroundColor: '#FFFFFF',
-            color: '#1A4263',
-            width: '240px',
-            padding: '12px 40px',
-            '&:hover': {
-              backgroundColor: '#fff',
-              borderWidth: '2px',
-            },
-          }, style]}
-          disabled={disabled}
-        >
-          <Text text={text} align="center" />
-        </Button>
+        <Box>
+          <Button
+            onClick={onClick}
+            variant="outlined"
+            sx={[{
+              border: '2px solid #1A4263',
+              borderRadius: '100vh',
+              backgroundColor: '#FFFFFF',
+              color: '#1A4263',
+              width: '240px',
+              padding: '12px 40px',
+              zIndex: '100',
+              '&:hover': {
+                backgroundColor: '#fff',
+                borderWidth: '2px',
+              },
+              '&:hover +.imgBox': {
+                opacity: '1',
+              }
+            }, style]}
+            disabled={disabled}
+          >
+            <Text text={text} align="center" />
+          </Button>
+          <Box className='imgBox'
+            sx={{opacity: '0', zIndex:'-100',}}
+          >
+            <Image className='image1' src={img} alt='飾り' style={{
+              width: '107%',
+              height: '107%',
+              left:'-12px',
+              zIndex:'-1',
+              marginTop:'-70px',
+            }}/>
+          </Box>
+        </Box>
       ) : (
-        <div>
+        <Box>
           <Button
             onClick={onClick}
             variant="contained"
@@ -40,16 +57,31 @@ const FlatButton = (props) => {
               color: '#FFFFFF',
               width: '240px',
               padding: '12px 40px',
+              zIndex: '100',
               '&:hover': {
+                backgroundColor: '#1A4263',
                 borderWidth: '2px',
               },
+              // '&:hover +.imgBox': {
+              //   opacity: '1',
+              // }
             }, style]}
             disabled={disabled}
           >
             <Text text={text} align="center" />
           </Button>
-          <Image src={img} alt='飾り' />
-        </div>
+          <Box className='imgBox'
+            sx={{opacity: '0', zIndex:'-100',}}
+          >
+          <Image className='image1' src={img} alt='飾り' style={{
+              width: '107%',
+              height: '107%',
+              left:'-12px',
+              zIndex:'-1',
+              marginTop:'-70px',
+            }}/>
+          </Box>
+        </Box>
       )}
     </Box>
   )

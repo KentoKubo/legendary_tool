@@ -125,7 +125,15 @@ const SearchQuestions = () => {
                   >
                     {item.pictures.map((p) => (
                       <ImageListItem key={p.picture_id} sx={{ margin: '0 0 -1px -1px' }}>
-                        <Image src={`data:image/png;base64,${p.picture}`} style={{ width: '100%', margin: 'auto' }} />
+                        <Image
+                          src={`data:image/png;base64,${p.picture}`}
+                          style={{
+                            width: '100%',
+                            margin: 'auto',
+                            animation: 'none !important',
+                            transitionDuration: 'none',
+                          }}
+                        />
                       </ImageListItem>
                     ))}
                   </ImageList>

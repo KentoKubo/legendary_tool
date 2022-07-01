@@ -102,7 +102,7 @@ const AnswerDetail = () => {
                   <Image
                     className={style.imgList}
                     src={`data:image/png;base64,${picture.picture}`}
-                    style={{ width: '50%', margin: 'auto' }}
+                    style={{ width: '50%', margin: 'auto', animation: 'none !important', transitionDuration: 'none' }}
                   />
                   <ImageListItemBar
                     position="below"

@@ -18,6 +18,7 @@ import AnswerList from './pages/AnswerList/AnswerList'
 import UploadImages from './pages/UploadImages/UploadImages'
 import InputTitle from './pages/InputTitle/InputTitle'
 import CreateConfirmation from './pages/CreateConfirmation/CreateConfirmation'
+import Header from './components/Header/Header'
 
 const root = document.getElementById('root')
 ReactDOM.render(
@@ -33,17 +34,87 @@ ReactDOM.render(
           <Route path="/" element={<Top />} />
           <Route path="/search-questions" element={<SearchQuestions />} />
           <Route path="/input-name" element={<InputName />} />
-          <Route path="/answer-preparation" element={<AnswerPreparation />} />
-          <Route path="/answer-questions" element={<AnswerQuestions />} />
-          <Route path="/answer-confirmation" element={<AnswerConfirmation />} />
+          <Route
+            path="/answer-preparation"
+            element={
+              <Header from="answer">
+                <AnswerPreparation />
+              </Header>
+            }
+          />
+          <Route
+            path="/answer-questions"
+            element={
+              <Header from="answer">
+                <AnswerQuestions />
+              </Header>
+            }
+          />
+          <Route
+            path="/answer-confirmation"
+            element={
+              <Header from="answer">
+                <AnswerConfirmation />
+              </Header>
+            }
+          />
           <Route path="/thanks" element={<Thanks />} />
-          <Route path="/answer-list" element={<AnswerList />} />
-          <Route path="/answer-select" element={<AnswerSelect />} />
-          <Route path="/answer-search" element={<AnswerSearch />} />
-          <Route path="/answer-detail" element={<AnswerDetail />} />
-          <Route path="/upload-images" element={<UploadImages />} />
-          <Route path="/input-title" element={<InputTitle />} />
-          <Route path="/create-confirmation" element={<CreateConfirmation />} />
+          <Route
+            path="/answer-list"
+            element={
+              <Header from="see">
+                <AnswerList />
+              </Header>
+            }
+          />
+          <Route
+            path="/answer-select"
+            element={
+              <Header from="see">
+                <AnswerSelect />
+              </Header>
+            }
+          />
+          <Route
+            path="/answer-search"
+            element={
+              <Header from="see">
+                <AnswerSearch />
+              </Header>
+            }
+          />
+          <Route
+            path="/answer-detail"
+            element={
+              <Header from="see">
+                <AnswerDetail />
+              </Header>
+            }
+          />
+          <Route
+            path="/upload-images"
+            element={
+              <Header from="create">
+                <UploadImages />
+              </Header>
+            }
+          />
+          <Route
+            path="/input-title"
+            element={
+              <Header from="create">
+                <InputTitle />
+              </Header>
+            }
+          />
+          <Route
+            path="/create-confirmation"
+            element={
+              <Header from="create">
+                <CreateConfirmation />
+              </Header>
+            }
+          />
         </Routes>
       </Router>
     </div>

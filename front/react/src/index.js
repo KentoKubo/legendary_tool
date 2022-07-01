@@ -28,7 +28,6 @@ ReactDOM.render(
     <div className="blue-2" />
     <div className="orange-box" />
     <div className="container">
-    <div className="green-design" />
       <Router>
         <Routes>
           <Route path="/" element={<Top />} />

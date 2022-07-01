@@ -40,17 +40,6 @@ code {
   background-repeat: no-repeat;
   z-index: -1;
 }
-.green-design{
-  position: absolute;
-  width: 30%;
-  height: 30%;
-  left: 10%;
-  top: 20%;
-  background-image: url('./images/green.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: -1;
-}
 
 .blue-1 {
   position: absolute;

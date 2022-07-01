@@ -7,6 +7,8 @@ import FlatButton from '../../components/FlatButton'
 import TopImage from '../../images/top.png'
 import '../../font/mini-wakuwaku.otf'
 
+import green from '../../images/greenBackground.png'
+
 import style from './Top.module.scss'
 
 const Top = () => {
@@ -36,6 +38,7 @@ const Top = () => {
               border: '2px solid #1A4263',
             }
           }}
+          img={green}
         />
         <FlatButton
           text="答えてあそぶ！"
@@ -48,6 +51,7 @@ const Top = () => {
               border: '2px solid #1A4263',
             }
           }}
+          img={green}
         />
         <FlatButton
           text="見てあそぶ！"
@@ -60,6 +64,7 @@ const Top = () => {
               border: '2px solid #1A4263',
             }
           }}
+          img={green}
         />
       </Box>
     </Box>

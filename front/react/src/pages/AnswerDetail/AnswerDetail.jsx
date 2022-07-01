@@ -64,7 +64,7 @@ const AnswerDetail = () => {
   }
   const toDate = () => {
     const date = new Date(answerList[selectedAnswerNum].create_at)
-    return `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`
+    return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`
   }
 
   return (
@@ -123,7 +123,13 @@ const AnswerDetail = () => {
           </ImageList>
           {answerList.length > 0 && (
             <Text
-              text={`回答者 : ${answerList[selectedAnswerNum].answerer_name} 回答日時 : ${toDate()}`}
+              text={`回答者 : ${answerList[selectedAnswerNum].answerer_name}\u3000 回答日時 : ${toDate()}`}
+              align="right"
+              style={{
+                width: '70%',
+                margin: 'auto',
+                color: '#545454',
+              }}
             />
           )}
         </div>

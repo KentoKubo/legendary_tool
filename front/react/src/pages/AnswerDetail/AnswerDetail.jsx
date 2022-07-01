@@ -14,12 +14,14 @@ import right from '../../images/right.png'
 /* eslint no-console:0 */
 /* eslint no-return-assign:0 */
 /* eslint no-param-reassign:0 */
+/* eslint react/jsx-curly-brace-presence:0 */
 
 const AnswerDetail = () => {
-
   const [selectedAnswerNum, setSelectedAnswerNum] = useState(0)
   const [answerList, setAnswerList] = useState([])
   const [answer, setAnswer] = useState([])
+  // const [answerName, setAnswerName] = useState()
+  // const [createAt, setCreateAt] = useState()
 
   const navigate = useNavigate()
   const location = useLocation()
@@ -33,7 +35,7 @@ const AnswerDetail = () => {
     }
     getAnswerList()
   }, [])
-  console.log(answerList)
+  console.log(answerList[selectedAnswerNum])
   
   useEffect(() => {
     const fetchAnswer = async () => {
@@ -41,9 +43,6 @@ const AnswerDetail = () => {
       setAnswer(result.data.characters)
     }
     fetchAnswer()
-    questionItem.pictures.map((quesItem) =>
-      answer.map((ansItem) => ansItem.picture_id === quesItem.picture_id && (ansItem.picture = quesItem.picture))
-    )
   }, [answerList, selectedAnswerNum])
 
   const clickBackButton = () => {
@@ -61,6 +60,13 @@ const AnswerDetail = () => {
       setSelectedAnswerNum(selectedAnswerNum + 1)
     }
   }
+  // const toDate = () => {
+  //   const date = new Date(answerList[selectedAnswerNum].create_at)
+  //   return `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日`
+  // }
+  // setCreateAt(toDate())
+  // setAnswerName(answerList[selectedAnswerNum].answerer_name)
+  // setAnswerName("moyu")
 
   return (
     <div className={style.container}>
@@ -111,7 +117,8 @@ const AnswerDetail = () => {
                 </ImageListItem>
               ))}
           </ImageList>
-          <Text text={`回答者 : ${answerList[selectedAnswerNum].answerer_name} 回答日時 : ${answerList[selectedAnswerNum].create_at}`} />
+          {/* <Text text={`回答者 : ${answerList[selectedAnswerNum].answerer_name} 回答日時 : ${toDate()}`} /> */}
+          {/* <Text text={`回答者 : ${answerName} 回答日時 : ${createAt}`} /> */}
         </div>
         {(selectedAnswerNum !== answerList.length - 1)
           ? <button type="button" onClick={clickNextButton}>

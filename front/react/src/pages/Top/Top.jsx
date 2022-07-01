@@ -9,6 +9,8 @@ import '../../font/mini-wakuwaku.otf'
 
 import style from './Top.module.scss'
 
+import green from '../../images/green.png'
+
 const Top = () => {
   const navigate = useNavigate()
 
@@ -26,18 +28,37 @@ const Top = () => {
           variant="white"
           onClick={() => navigate('/input-name', { state: { from: 'create' } })}
           style={{
-            background: 'blue',
+            '&:hover': {
+              backgroundColor: '#1A4263',
+              color: '#fff',
+              border: '2px solid #1A4263',
+            }
           }}
+          img={green}
         />
         <FlatButton
           text="答えてあそぶ！"
           variant="white"
           onClick={() => navigate('/search-questions', { state: { from: 'answer' } })}
+          style={{
+            '&:hover': {
+              backgroundColor: '#1A4263',
+              color: '#fff',
+              border: '2px solid #1A4263',
+            }
+          }}
         />
         <FlatButton
           text="見てあそぶ！"
           variant="white"
           onClick={() => navigate('/search-questions', { state: { from: 'see' } })}
+          style={{
+            '&:hover': {
+              backgroundColor: '#1A4263',
+              color: '#fff',
+              border: '2px solid #1A4263',
+            }
+          }}
         />
       </Box>
     </Box>

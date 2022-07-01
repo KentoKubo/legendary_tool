@@ -22,7 +22,6 @@ class PictureSerializer(serializers.ModelSerializer):
         # instance of the current storage class
         media_storage = get_storage_class()()
         url = media_storage.url(instance.__dict__["file_path"])
-        print(url)
         picture_data = base64.b64encode(requests.get(url).content)
         return picture_data
     

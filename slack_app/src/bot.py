@@ -11,9 +11,8 @@ load_dotenv()
 
 app = App(token=os.environ["SLACK_BOT_TOKEN"])
 
-api_endpoint = "http://api-server:8000"
-#front_base_url = "https://hogehoge.com"
-front_base_url = "https://google.com/"
+api_endpoint = "https://mirishira-legendary-tool.herokuapp.com/"
+front_base_url = "https://legendary-tool.vercel.app/"
 
 mirishira_bot = MirishiraSlackBot(app, api_endpoint, front_base_url)
 mirishira_bot.run()

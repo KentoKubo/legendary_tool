@@ -1,5 +1,12 @@
 import requests
-import json
+import logging
+
+logging.basicConfig(level=logging.DEBUG,
+    filename="test.log",
+    format="%(asctime)s %(levelname)-7s %(message)s"
+    )
+
+logger = logging.getLogger(__name__)
 
 class MirishiraApiCaller:
     def __init__(self, apiBaseEndPoint: str):
@@ -8,7 +15,8 @@ class MirishiraApiCaller:
 
     def pickupNewestQuestion(self):
         response = requests.get(self.apiBaseEndPoint + "questions/", headers=self.commonHeader)
-        questionList = json.loads(response.json())["questions"]
+        questionList = response.json()["questions"]
+        logger.info(questionList)
 
         # with open("./api_test/question_test.json") as f:
             # questionList = json.load(f)["questions"]
@@ -18,7 +26,7 @@ class MirishiraApiCaller:
 
     def getQuestionFromTitle(self, title):
         response = requests.get(self.apiBaseEndPoint + "questions/?title=" + title, headers=self.commonHeader)
-        questionList = json.loads(response.json())["questions"]
+        questionList = response.json()["questions"]
 
         # with open("./api_test/question_test.json") as f:
             # questionList = json.load(f)["questions"]
@@ -35,7 +43,7 @@ class MirishiraApiCaller:
         }
 
         response = requests.post(self.apiBaseEndPoint + "answers/", json = postData)
-        return json.loads(response.json())["answer_id"]
+        return response.json()["answer_id"]
 
         # with open('./api_test/answer_posted.json', 'w') as f:
             # json.dump(postData, f, indent=4)
@@ -43,11 +51,11 @@ class MirishiraApiCaller:
 
     def searchAndGetAnswer(self, questionId: int, answerId: int):
         response = requests.get(self.apiBaseEndPoint + "answers/?question_id=" + str(questionId), headers=self.commonHeader)
-        answerList = json.loads(response.json())["answers"]
-        answerInfo = list(filter(lambda oneAnswer : oneAnswer["answer_id"] == answerId, answerList))[0]
+        answerList = response.json()["answers"]
+        answerInfo = list(filter(lambda oneAnswer : oneAnswer["answer_id"] == int(answerId), answerList))[0]
 
-        response = requests.get(self.apiBaseEndPoint + "answer/" + str(answerId) + "/", headers=self.commonHeader)
-        answer = json.loads(response.json())
+        response = requests.get(self.apiBaseEndPoint + "answers/" + str(answerId) + "/", headers=self.commonHeader)
+        answer = response.json()
 
         # with open("./api_test/answers_test.json") as f:
             # answerInfo = json.load(f)["answers"][-1]

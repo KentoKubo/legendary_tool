@@ -235,6 +235,13 @@ class MirishiraSlackBot:
         def openAnswerLookModal(ack: Ack, body: dict, client, logger: logging.Logger):
             ack()
 
+            waitView = client.views_open(
+                trigger_id=body["trigger_id"],
+                view=self.slackView.getAnswerProcessWaitView()
+            )
+
+            logger.info(waitView)
+
             titleAndId = body["actions"][0]["value"].rsplit("_", 2)
             targetQuestion = self.mirishiraApiCaller.getQuestionFromTitle(titleAndId[0])
             targetAnswer = self.mirishiraApiCaller.searchAndGetAnswer(titleAndId[1], titleAndId[2])
@@ -249,8 +256,8 @@ class MirishiraSlackBot:
 			    "answererName":targetAnswer["answererName"]
 		    }
 
-            client.views_open(
-                trigger_id=body["trigger_id"],
+            client.views_update(
+                view_id=waitView["view"]["id"],
                 view=self.slackView.getAnswerLookStartView(
                     json.dumps(answeredData),
                     targetQuestion,

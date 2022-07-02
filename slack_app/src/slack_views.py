@@ -137,7 +137,7 @@ class MirishiraSlackView:
 						    "emoji": True
 					    },
 					    "value": "to_front",
-					    "url": frontBaseUrl + str(question["question_id"]) + "/", # TODO:fix
+					    "url": frontBaseUrl,
 					    "action_id": "open_web_app"
 				    },
 				    {
@@ -152,13 +152,6 @@ class MirishiraSlackView:
 					    "action_id": "open_answer_modal"
 				    }
 			    ]
-		    },
-            {
-			    "type": "section",
-			    "text": {
-				    "type": "mrkdwn",
-                    "text": "他のミリしらは <" + frontBaseUrl + "top/|こちら> から遊んでね！" # TODO:fix
-			    }
 		    }
         ]
         return questionBlock
@@ -223,7 +216,7 @@ class MirishiraSlackView:
 			        "type": "section",
 			        "text": {
 				        "type": "mrkdwn",
-				        "text": "*" + answererName + "* さんですね！\nそれでは" + title + "の回答を開始します！\n 制限時間は1キャラ 30 秒． キャラクターは全部で " + str(imageNum) + " 体だよ！"
+				        "text": "*" + answererName + "* さんですね！\nそれでは" + title + "の回答を開始します！\n 制限時間は1キャラ 30 秒． キャラクターは全部で " + str(imageNum) + " 体です"
 			        }
 		        }
 	        ],
@@ -443,18 +436,18 @@ class MirishiraSlackView:
 					    "type": "button",
 					    "text": {
 						    "type": "plain_text",
-						    "text": "webで回答を見る",
+						    "text": "webで見る",
 						    "emoji": True
 					    },
 					    "value": "to_front",
-					    "url": frontBaseUrl + str(answerId) + "/", # TODO:fix
+					    "url": frontBaseUrl,
 					    "action_id": "open_web_app"
 				    },
 				    {
 					    "type": "button",
 					    "text": {
 						    "type": "plain_text",
-						    "text": "slackで回答を見る",
+						    "text": "slackで見る",
 						    "emoji": True
 					    },
 					    "value":question["title"] + "_" + str(question["question_id"]) + "_" + str(answerId),
@@ -462,13 +455,6 @@ class MirishiraSlackView:
 					    "action_id": "open_answer_look_modal"
 				    }
 			    ]
-		    },
-            {
-			    "type": "section",
-			    "text": {
-				    "type": "mrkdwn",
-                    "text": "他のミリしらは <" + frontBaseUrl + "top/|こちら> から遊んでね！" # TODO:fix
-			    }
 		    }
         ]
         return shareBlock
@@ -513,24 +499,38 @@ class MirishiraSlackView:
 					    "type": "button",
 					    "text": {
 						    "type": "plain_text",
-						    "text": "webで回答を見る",
+						    "text": "webで見る",
 						    "emoji": True
 					    },
 					    "value": "to_front",
-					    "url": frontBaseUrl + str(answerId) + "/", # TODO:fix
+					    "url": frontBaseUrl,
 					    "action_id": "open_web_app"
 				    }
 			    ]
-		    },
-            {
-			    "type": "section",
-			    "text": {
-				    "type": "mrkdwn",
-                    "text": "他のミリしらは <" + frontBaseUrl + "top/|こちら> から遊んでね！" # TODO:fix
-			    }
 		    }
         ]
         return shareWithNoNameBlock
+
+    def getAnswerProcessWaitView(self):
+        answerProcessWaitView={
+            "type": "modal",
+            "callback_id": "answer_process_wait",
+            "title": {
+				"type": "plain_text",
+				"text": "ミリしら閲覧フォーム"
+			},
+            "close": {
+				"type": "plain_text",
+				"text": "閉じる"
+			},
+            "blocks": [
+                {
+                    "type": "section",
+                    "text": {"type": "mrkdwn", "text": "*回答取得中...*"},
+                }
+            ],
+        }
+        return answerProcessWaitView
 
     def getAnswerLookStartView(self, targetAnswerData: str, question: dict, answererName: str):
         answerLookStartView={
